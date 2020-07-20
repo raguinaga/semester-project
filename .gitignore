@@ -3,4 +3,4 @@ out/
 
 # Rule for intelliJ files/folders
 *.iml
-idea/
+.idea/
