@@ -7,10 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
-public class Main extends Application {
+public class CalendarGUI extends Application {
 
     @Override
     public void start(Stage stage) {
+
         stage.setTitle("To Do Calendar");
     }
 
