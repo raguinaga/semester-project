@@ -11,7 +11,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-
+        stage.setTitle("To Do Calendar");
     }
 
     public static void main(String[] args) {
