@@ -1,0 +1,6 @@
+# Rule for class files
+out/
+
+# Rule for intelliJ files/folders
+*.iml
+idea/
