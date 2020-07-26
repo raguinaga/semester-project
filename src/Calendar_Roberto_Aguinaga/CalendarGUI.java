@@ -12,8 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.geometry.Pos;
 
-import java.time.LocalDate;
-import java.time.Month;
 
 public class CalendarGUI extends Application {
 
