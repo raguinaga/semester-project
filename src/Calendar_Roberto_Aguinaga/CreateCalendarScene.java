@@ -10,7 +10,12 @@ public class CreateCalendarScene {
     // this off windows' calendar in the taskbar.
 
     private static void createWeekHeader() {
-      Hbox header = new HBox();
+      HBox headerBox = new HBox();
+      String[] days = {"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"};
+
+      for (int i = 0; i < days.length; i++) {
+        
+      }
     }
   
 }
