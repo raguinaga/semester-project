@@ -17,7 +17,7 @@ public class CalendarModel {
     protected GregorianCalendar instanceCalendar;
 
     public CalendarModel() {
-        instanceCalendar = new GregorianCalendar(,);
+        instanceCalendar = new GregorianCalendar(year,month,1);
     }
 
 
