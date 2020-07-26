@@ -20,9 +20,7 @@ public class CalendarGUI extends Application {
 
         // Get date at program launch, so the default calendar scene
         // is the current year/month
-        CalendarModel defaultModel =
-                new CalendarModel(defaultDate.getMonthValue(),
-                        defaultDate.getYear());
+        CalendarModel defaultModel = new CalendarModel();
 
         // Create the top-level container, a VBox.
         VBox root = new VBox();
