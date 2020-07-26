@@ -46,6 +46,15 @@ public class noteHandler {
 
     }
 
+    protected void writeNotes(String note) {
+        File noteFile = new File(CalendarModel);
+        try {
+
+        } catch (IOException e) {
+
+        }
+    }
+
     public Scene getNoteScene() {
         return noteScene;
     }
