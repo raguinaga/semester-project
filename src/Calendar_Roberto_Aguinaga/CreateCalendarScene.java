@@ -7,7 +7,9 @@
  */
 package Calendar_Roberto_Aguinaga;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -19,7 +21,11 @@ import javafx.scene.layout.VBox;
 public abstract class CreateCalendarScene {
     //
     protected Scene calendarScene;
-    protected HBox root = new HBox();
+    protected VBox root = new VBox();
+    private DatePicker picker = new DatePicker();
+    protected GridPane calendarGrid = new GridPane();
+
+
     private final int WEEKDAYS = 7; // days in a week
     private final int WEEKROWS = 6; // I honestly just based
     // this off windows' calendar in the taskbar.
@@ -72,4 +78,9 @@ public abstract class CreateCalendarScene {
         }
     }
 
+    public Scene getCalendarScene() {
+        root.setAlignment(Pos.CENTER);
+        root.getChildren().add(picker);
+        calendarScene = new Scene(root);
+    }
 }
