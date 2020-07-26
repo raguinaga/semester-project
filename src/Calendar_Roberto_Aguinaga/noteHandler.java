@@ -7,7 +7,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 
 import java.io.*;
 
@@ -42,18 +43,18 @@ public class noteHandler {
 
     }
 
-    protected String[] getNotes() {
+    /*protected String[] getNotes() {
 
-    }
+    }*/
 
-    protected void writeNotes(String note) {
+    /*protected void writeNotes(String note) {
         File noteFile = new File(CalendarModel.monthName + );
         try {
 
         } catch (IOException e) {
 
         }
-    }
+    }*/
 
     public Scene getNoteScene() {
         return noteScene;
