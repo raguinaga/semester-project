@@ -13,7 +13,8 @@ public class CalendarModel {
     /*
      * Name of the calendar, plus all the info needed to successfully
      * create a Gregorian calendar. Java's GregorianCalendar API will
-     * generate the right starting date for the calendar.
+     * generate the right starting date for the calendar given the year
+     * and month.
      */
     protected String calendarName;
     protected int year;
@@ -26,8 +27,9 @@ public class CalendarModel {
      * This constructor does four main things: Creates a GregorianCalendar
      * Gives the calendarName field the name of the current month, 
      * Gets the current day of the week, and how many days are in this calendar
-     * @param month
-     * @param year
+     * @param month An enum, or int value from 1-12 representing the months
+     * of the year
+     * @param year An int value representing the year.
      */
     public CalendarModel(int month, int year) {
         instanceCalendar = new GregorianCalendar(year, month, 1);
