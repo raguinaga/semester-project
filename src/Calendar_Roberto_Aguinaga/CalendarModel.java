@@ -16,6 +16,13 @@ public class CalendarModel {
     protected int daysInMonth;
     protected GregorianCalendar instanceCalendar;
 
+    /**
+     * This constructor does four main things: Creates a GregorianCalendar
+     * Gives the calendarName field the name of the current month, 
+     * Gets the current day of the week, and how many days are in this calendar
+     * @param month
+     * @param year
+     */
     public CalendarModel(int month, int year) {
         instanceCalendar = new GregorianCalendar(year, month, 1);
         switch (month) {
