@@ -47,19 +47,6 @@ public class CalendarGUI extends Application {
         stage.show();
     }
 
-    public void initializeCalendarGrid(CalendarModel cm) {
-        GridPane calendarGrid;
-        int columns = 7; // days in a week
-        int rows = 6; // I honestly just based this off the # of rows
-                      // in the microsoft calendar preview-thing in the
-                      // taskbar
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-
-            }
-        }
-    }
-
     public static void main(String[] args) {
         launch(args);
     }
