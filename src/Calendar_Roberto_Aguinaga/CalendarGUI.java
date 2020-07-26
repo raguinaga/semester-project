@@ -42,13 +42,15 @@ public class CalendarGUI extends Application {
         HBox calendarBox = new HBox();
         GridPane calendarGrid = new GridPane();
 
-        Scene scene = new Scene(root);
+        Scene mainScene = new Scene(root);
         stage.setTitle("To Do Calendar");
-        stage.setScene(scene);
+        stage.setScene(mainScene);
         stage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
+
+
 }
