@@ -30,10 +30,16 @@ public class CalendarGUI extends Application {
 
         // Create the top-level container, a VBox.
         VBox root = new VBox();
+
+        // Create an hbox to house the top-half of the program, a hbox container
+        // with a datePicker control, so that the user can move around to other dates.
         Label datePickerLabel  = new Label("Use the form to pick a " +
                 "new date");
         HBox datePickBox = new HBox(new DatePicker());
+        root.getChildren().add(datePickBox);
 
+        // Create another HBox to house the actual calendar, which is a gridpane
+        
 
         Scene scene = new Scene(root);
         stage.setTitle("To Do Calendar");
