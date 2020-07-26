@@ -35,7 +35,7 @@ public abstract class CreateCalendarScene {
             // will contain the labels that have the day names.
             HBox lblBox = new HBox(new Label(days[i]));
 
-            // Make sure that the Hboxes fill out the header HBox.
+            // Make sure that the HBoxes fill out the header HBox.
             HBox.setHgrow(lblBox, Priority.ALWAYS);
             lblBox.setMaxWidth(Double.MAX_VALUE);
             lblBox.setMinWidth(headerBox.getPrefWidth() / 7);
