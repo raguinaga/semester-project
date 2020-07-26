@@ -47,7 +47,7 @@ public class noteHandler {
     }
 
     protected void writeNotes(String note) {
-        File noteFile = new File(CalendarModel);
+        File noteFile = new File(CalendarModel.monthName + );
         try {
 
         } catch (IOException e) {
