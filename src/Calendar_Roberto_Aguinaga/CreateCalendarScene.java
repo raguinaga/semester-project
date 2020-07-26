@@ -16,7 +16,7 @@ public class CreateCalendarScene {
 
       for (int i = 0; i < days.length; i++) {
         HBox lblBox = new HBox(new Label(days[i]));
-        HBox.setHgrow(Priority.ALWAYS);
+        HBox.setHgrow(lblBox, Priority.ALWAYS);
       }
     }
   
