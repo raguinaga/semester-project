@@ -12,9 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.geometry.Pos;
 
-import java.security.PolicySpi;
-import java.time.LocalDate;
-import java.time.Month;
 
 public class CalendarGUI extends Application {
 
@@ -23,6 +20,9 @@ public class CalendarGUI extends Application {
 
         // Get date at program launch, so the default calendar scene
         // is the current year/month
+        CalendarModel defaultModel =
+                new CalendarModel(defaultDate.getMonthValue(),
+                        defaultDate.getYear());
 
         // Create the top-level container, a VBox.
         VBox root = new VBox();
@@ -38,15 +38,13 @@ public class CalendarGUI extends Application {
         HBox calendarBox = new HBox();
         GridPane calendarGrid = new GridPane();
 
-        Scene mainScene = new Scene(root);
+        Scene scene = new Scene(root);
         stage.setTitle("To Do Calendar");
-        stage.setScene(mainScene);
+        stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-
-
 }
