@@ -18,14 +18,16 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 
-public abstract class CalendarScene {
+public class CalendarScene {
     protected Scene calendarScene; // the main scene with a calendar.
     protected VBox root = new VBox(); // top-level container for the
     // scene
     private DatePicker picker = new DatePicker(); // So users can
     // move to other dates
+    protected HBox headerBox;
     protected GridPane calendarGrid = new GridPane(); // Container
     // for calendar.
+
 
 
     private final int WEEKDAYS = 7; // days in a week
@@ -35,8 +37,8 @@ public abstract class CalendarScene {
     /**
      * This method generates the weekday header.
      */
-    private HBox createWeekHeader() {
-        HBox headerBox = new HBox(); // top level hbox
+    private void createWeekHeader() {
+        headerBox = new HBox(); // top level hbox
         headerBox.setPrefSize(600, 30); // Trying out sizes
         String[] days = {"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"};
 
@@ -54,12 +56,14 @@ public abstract class CalendarScene {
             // Add label HBoxes to header HBox
             headerBox.getChildren().add(lblBox);
         }
-        return headerBox;
+        // Add header to calendarGrid
+        calendarGrid.addRow(0,headerBox);
     }
 
-    public void createCalendar(GridPane calendarGrid) {
-        HBox headerBox = createWeekHeader();
-        for (int rows = 0; rows < WEEKROWS; rows++) {
+    private void createCalendar() {
+        // Have to start at 1 for the rows loop because of the header
+        // row.
+        for (int rows = 1; rows < WEEKROWS; rows++) {
             for (int cols = 0; cols < WEEKDAYS; cols++) {
                 // Create VBoxes for day cells
                 VBox dayCell = new VBox();
@@ -69,10 +73,10 @@ public abstract class CalendarScene {
                 GridPane.setVgrow(dayCell, Priority.ALWAYS);
 
                 // on each cell, add an event handler
-                dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                /*dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
                         event -> {
                             noteHandler.addNote(dayCell);
-                        });
+                        });*/
 
                 // Add VBoxes to the GridPane
                 calendarGrid.add(dayCell, cols, rows);
@@ -81,8 +85,11 @@ public abstract class CalendarScene {
     }
 
     public Scene getCalendarScene() {
+        createWeekHeader();
+        createCalendar();
         root.setAlignment(Pos.CENTER);
         root.getChildren().addAll(picker, calendarGrid);
+        root.setSpacing(15);
         calendarScene = new Scene(root);
         return calendarScene;
     }
