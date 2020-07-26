@@ -5,5 +5,5 @@ import javafx.scene.layout.HBox;
 
 public class CalendarSceneBase {
     protected HBox dayOfWeek;
-    
+
 }
