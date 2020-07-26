@@ -43,9 +43,10 @@ public abstract class CreateCalendarScene {
             // Add label HBoxes to header HBox
             headerBox.getChildren().add(lblBox);
         }
+        return headerBox;
     }
 
-    public void createCalendar(GridPane gp) {
+    public void createCalendar(GridPane calendarGrid) {
         HBox headerBox = createWeekHeader();
         for (int rows = 0; rows < WEEKROWS; rows++) {
             for (int cols = 0; cols < WEEKDAYS; cols++) {
@@ -59,11 +60,11 @@ public abstract class CreateCalendarScene {
                 // on each cell, add an event handler
                 dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
                         event -> {
-                            addNote();
+                            noteHandler.addNote(dayCell);
                         });
 
                 // Add VBoxes to the GridPane
-                gp.add(dayCell, cols, rows);
+                calendarGrid.add(dayCell, cols, rows);
             }
         }
     }
