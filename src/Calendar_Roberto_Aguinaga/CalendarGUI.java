@@ -16,7 +16,7 @@ import javafx.geometry.Pos;
 public class CalendarGUI extends Application {
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage window) {
 
         // Get date at program launch, so the default calendar scene
         // is the current year/month
@@ -36,10 +36,7 @@ public class CalendarGUI extends Application {
         HBox calendarBox = new HBox();
         GridPane calendarGrid = new GridPane();
 
-        Scene scene = new Scene(root);
-        stage.setTitle("To Do Calendar");
-        stage.setScene(scene);
-        stage.show();
+        window.setScene();
     }
 
     public static void main(String[] args) {

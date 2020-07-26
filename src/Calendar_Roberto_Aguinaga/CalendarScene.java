@@ -18,12 +18,14 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 
-public abstract class CreateCalendarScene {
-    //
-    protected Scene calendarScene;
-    protected VBox root = new VBox();
-    private DatePicker picker = new DatePicker();
-    protected GridPane calendarGrid = new GridPane();
+public abstract class CalendarScene {
+    protected Scene calendarScene; // the main scene with a calendar.
+    protected VBox root = new VBox(); // top-level container for the
+    // scene
+    private DatePicker picker = new DatePicker(); // So users can
+    // move to other dates
+    protected GridPane calendarGrid = new GridPane(); // Container
+    // for calendar.
 
 
     private final int WEEKDAYS = 7; // days in a week
@@ -80,7 +82,8 @@ public abstract class CreateCalendarScene {
 
     public Scene getCalendarScene() {
         root.setAlignment(Pos.CENTER);
-        root.getChildren().add(picker);
+        root.getChildren().addAll(picker, calendarGrid);
         calendarScene = new Scene(root);
+        return calendarScene;
     }
 }
