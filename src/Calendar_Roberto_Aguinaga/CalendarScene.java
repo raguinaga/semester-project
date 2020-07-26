@@ -13,11 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
 
 
 public class CalendarScene {
@@ -97,13 +93,16 @@ public class CalendarScene {
         pickerBox.setAlignment(Pos.TOP_CENTER);
         gridBox = new HBox(calendarGrid);
         gridBox.setAlignment(Pos.BASELINE_CENTER);
+
+        HBox.setHgrow(gridBox, Priority.ALWAYS);
+        HBox.setHgrow(calendarGrid, Priority.ALWAYS);
         // Set up the anchors on the DatePicker / Gridpane
         root.setAlignment(Pos.CENTER);
         root.getChildren().addAll(pickerBox,gridBox);
         root.setSpacing(15);
         root.setPadding(new Insets(15));
 
-        calendarScene = new Scene(root);
+        calendarScene = new Scene(root,1000,900);
 
         return calendarScene;
     }
