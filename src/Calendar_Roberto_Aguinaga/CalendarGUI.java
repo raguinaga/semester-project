@@ -39,7 +39,7 @@ public class CalendarGUI extends Application {
         root.getChildren().add(datePickBox);
 
         // Create another HBox to house the actual calendar, which is a gridpane
-        
+        HBox calendarBox = new HBox();
 
         Scene scene = new Scene(root);
         stage.setTitle("To Do Calendar");
