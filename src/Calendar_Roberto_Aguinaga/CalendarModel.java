@@ -7,6 +7,7 @@
 package Calendar_Roberto_Aguinaga;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -17,11 +18,11 @@ public class CalendarModel {
      * generate the right starting date for the calendar given the year
      * and month.
      */
-    protected String calendarName;
-    protected int year;
-    protected int month;
-    protected int offset;
-    protected int daysInMonth;
+    protected String date;
+    protected static String monthName;
+    protected static int year;
+    protected static int month;
+    protected static int daysInMonth;
     protected GregorianCalendar calendar;
 
     /**
@@ -37,34 +38,36 @@ public class CalendarModel {
 
         switch (defaultDate.getMonthValue()) {
             case 1:
-                calendarName = "January";
+                monthName = "January";
             case 2:
-                calendarName = "February";
+                monthName = "February";
             case 3:
-                calendarName = "March";
+                monthName = "March";
             case 4:
-                calendarName = "April";
+                monthName = "April";
             case 5:
-                calendarName = "May";
+                monthName = "May";
             case 6:
-                calendarName = "June";
+                monthName = "June";
             case 7:
-                calendarName = "July";
+                monthName = "July";
             case 8:
-                calendarName = "August";
+                monthName = "August";
             case 9:
-                calendarName = "September";
+                monthName = "September";
             case 10:
-                calendarName = "October";
+                monthName = "October";
             case 11:
-                calendarName = "November";
+                monthName = "November";
             case 12:
-                calendarName = "December";
+                monthName = "December";
         }
 
-        offset = calendar.get(Calendar.DAY_OF_WEEK);
         daysInMonth =
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        date = defaultDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     public CalendarModel(int year, int month) {
@@ -72,37 +75,42 @@ public class CalendarModel {
 
         switch (month) {
             case 1:
-                calendarName = "January";
+                monthName = "January";
             case 2:
-                calendarName = "February";
+                monthName = "February";
             case 3:
-                calendarName = "March";
+                monthName = "March";
             case 4:
-                calendarName = "April";
+                monthName = "April";
             case 5:
-                calendarName = "May";
+                monthName = "May";
             case 6:
-                calendarName = "June";
+                monthName = "June";
             case 7:
-                calendarName = "July";
+                monthName = "July";
             case 8:
-                calendarName = "August";
+                monthName = "August";
             case 9:
-                calendarName = "September";
+                monthName = "September";
             case 10:
-                calendarName = "October";
+                monthName = "October";
             case 11:
-                calendarName = "November";
+                monthName = "November";
             case 12:
-                calendarName = "December";
+                monthName = "December";
         }
-
-        offset = calendar.get(Calendar.DAY_OF_WEEK);
         daysInMonth =
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+
     }
 
-    public CalendarModel getDefaultInstance() {
+    public static CalendarModel getCurrentCalendar() {
+        return new CalendarModel(year, month);
+    }
+
+    public static CalendarModel getDefaultInstance() {
         return new CalendarModel();
     }
 }
