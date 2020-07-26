@@ -16,12 +16,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 
 public class CalendarScene {
     protected Scene calendarScene; // the main scene with a calendar.
     protected AnchorPane root = new AnchorPane();
-    protected VBox root = new VBox(); // top-level container for the
+    protected VBox sceneBox = new VBox(); // top-level container for the
     // scene
     private DatePicker picker = new DatePicker(); // So users can
     // move to other dates
@@ -86,15 +87,13 @@ public class CalendarScene {
     }
 
     public Scene getCalendarScene() {
-        AnchorPane datePane = new AnchorPane();
-        AnchorPane.setTopAnchor(root, 0.0);
-        datePane.getChildren().add(root);
+        // Set up the gridpane
         createWeekHeader();
         createCalendar();
-        root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(picker, calendarGrid);
-        root.setSpacing(15);
-        calendarScene = new Scene(datePane);
+
+        // 
+
+
         return calendarScene;
     }
 }
