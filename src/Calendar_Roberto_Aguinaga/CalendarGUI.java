@@ -22,12 +22,22 @@ public class CalendarGUI extends Application {
     @Override
     public void start(Stage stage) {
         LocalDate defaultDate = LocalDate.now();
+        CalendarModel defaultModel =
+                new CalendarModel(defaultDate.getMonthValue(),
+                        defaultDate.getYear());
+
         BorderPane root;
-        GridPane calendarGrid;
         Scene scene = new Scene(root);
         stage.setTitle("To Do Calendar");
         //stage.setScene();
         stage.show();
+    }
+
+    public GridPane initializeCalendarGrid(CalendarModel cm) {
+        GridPane calendarGrid;
+        int columns = 7; // days in a week
+        int rows = 6; // 
+
     }
 
     public static void main(String[] args) {
