@@ -7,6 +7,7 @@
  */
 package Calendar_Roberto_Aguinaga;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -17,12 +18,14 @@ import javafx.scene.layout.VBox;
 
 public abstract class CreateCalendarScene {
     //
+    protected Scene calendarScene;
+    protected HBox root = new HBox();
     private final int WEEKDAYS = 7; // days in a week
     private final int WEEKROWS = 6; // I honestly just based
     // this off windows' calendar in the taskbar.
 
     /**
-     * This method generates a weekday header.
+     * This method generates the weekday header.
      */
     private HBox createWeekHeader() {
         HBox headerBox = new HBox(); // top level hbox
