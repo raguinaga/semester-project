@@ -33,7 +33,7 @@ public class CalendarGUI extends Application {
 
         // Create an hbox to house the top-half of the program, a hbox container
         // with a datePicker control, so that the user can move around to other dates.
-        Label datePickerLabel  = new Label("Use the form to pick a " +
+        Label datePickerLabel = new Label("Use the form to pick a " +
                 "new date");
         HBox datePickBox = new HBox(new DatePicker());
         root.getChildren().add(datePickBox);
