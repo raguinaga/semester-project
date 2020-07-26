@@ -17,26 +17,12 @@ public class CalendarGUI extends Application {
 
     @Override
     public void start(Stage window) {
-
-        // Get date at program launch, so the default calendar scene
-        // is the current year/month
-        CalendarModel defaultModel = new CalendarModel();
-
-        // Create the top-level container, a VBox.
-        VBox root = new VBox();
-
-        // Create an hbox to house the top-half of the program, a hbox container
-        // with a datePicker control, so that the user can move around to other dates.
-        Label datePickerLabel = new Label("Use the form to pick a " +
-                "new date");
-        HBox datePickBox = new HBox(new DatePicker());
-        root.getChildren().add(datePickBox);
-
-        // Create another HBox to house the actual calendar, which is a gridpane
-        HBox calendarBox = new HBox();
-        GridPane calendarGrid = new GridPane();
-
-        window.setScene();
+        // Create a calendar model with default constructor
+        CalendarModel cm = new CalendarModel();
+        Scene defaultScene = new CalendarScene().getCalendarScene();
+        window.setScene(defaultScene);
+        window.setTitle("Calendar");
+        window.show();
     }
 
     public static void main(String[] args) {
