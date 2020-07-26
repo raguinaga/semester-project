@@ -1,9 +1,18 @@
 package Calendar_Roberto_Aguinaga;
 
+import java.util.GregorianCalendar;
+
 public class CalendarModel {
-    private String name;
-    private int startYear;
-    private int endYear;
+    /*
+     * Name of the calendar, plus all the info needed to successfully
+     * create a Gregorian calendar. Java's gregorian calendar will
+     * generate the right starting date for the calendar.
+     */
+    protected String name;
+    protected int year;
+    protected int firstDay;
+    protected int lastDay;
+    protected GregorianCalendar instanceCalendar;
 
     public CalendarModel(String name, int startYear, int endYear) {
         this.name = name;
