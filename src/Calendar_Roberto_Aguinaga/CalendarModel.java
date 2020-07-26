@@ -1,6 +1,6 @@
 /*
  * This class is a logical model of a calendar.
- * Specifically a Gregorian Calendar, in fact I 
+ * Specifically a Gregorian Calendar, in fact I
  * happen to use both the Calendar
  * and GregorianCalendar API in this class
  */
@@ -25,11 +25,12 @@ public class CalendarModel {
 
     /**
      * This constructor does four main things: Creates a GregorianCalendar
-     * Gives the calendarName field the name of the current month, 
+     * Gives the calendarName field the name of the current month,
      * Gets the current day of the week, and how many days are in this calendar
+     *
      * @param month An enum, or int value from 1-12 representing the months
-     * of the year
-     * @param year An int value representing the year.
+     *              of the year
+     * @param year  An int value representing the year.
      */
     public CalendarModel(int month, int year) {
         instanceCalendar = new GregorianCalendar(year, month, 1);
