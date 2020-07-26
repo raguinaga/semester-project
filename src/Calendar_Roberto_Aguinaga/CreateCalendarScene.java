@@ -1,8 +1,8 @@
 package Calendar_Roberto_Aguinaga;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
-
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 public class CreateCalendarScene {
     private static final int WEEKDAYS = 7; // days in a week
@@ -11,10 +11,12 @@ public class CreateCalendarScene {
 
     private static void createWeekHeader() {
       HBox headerBox = new HBox();
+      headerBox.setPrefSize(600, 30); // Trying out sizes
       String[] days = {"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"};
 
       for (int i = 0; i < days.length; i++) {
-        
+        HBox lblBox = new HBox(new Label(days[i]));
+        HBox.setHgrow(Priority.ALWAYS);
       }
     }
   
