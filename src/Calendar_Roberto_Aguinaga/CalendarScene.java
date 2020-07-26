@@ -7,6 +7,7 @@
  */
 package Calendar_Roberto_Aguinaga;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
@@ -21,12 +22,13 @@ import javafx.scene.layout.Priority;
 
 public class CalendarScene {
     protected Scene calendarScene; // the main scene with a calendar.
-    protected AnchorPane root = new AnchorPane();
-    protected VBox sceneBox = new VBox(); // top-level container for the
-    // scene
+    protected VBox root = new VBox();
+    protected AnchorPane anchorPane = new AnchorPane();
     private DatePicker picker = new DatePicker(); // So users can
     // move to other dates
+    private HBox pickerBox = new HBox(picker);
     protected HBox headerBox;
+    protected HBox gridBox;
     protected GridPane calendarGrid = new GridPane(); // Container
     // for calendar.
 
@@ -68,10 +70,10 @@ public class CalendarScene {
         for (int rows = 1; rows < WEEKROWS; rows++) {
             for (int cols = 0; cols < WEEKDAYS; cols++) {
                 // Create VBoxes for day cells
-                VBox dayCell = new VBox();
+                VBox dayCell = new VBox(new Label("Hi"));
 
                 // Make sure sizing for the cells consistent
-                dayCell.setMinWidth(headerBox.getPrefWidth() / 7);
+                //dayCell.setMinWidth(headerBox.getPrefWidth() / 7);
                 GridPane.setVgrow(dayCell, Priority.ALWAYS);
 
                 // on each cell, add an event handler
@@ -91,8 +93,17 @@ public class CalendarScene {
         createWeekHeader();
         createCalendar();
 
-        // 
+        //
+        pickerBox.setAlignment(Pos.TOP_CENTER);
+        gridBox = new HBox(calendarGrid);
+        gridBox.setAlignment(Pos.BASELINE_CENTER);
+        // Set up the anchors on the DatePicker / Gridpane
+        root.setAlignment(Pos.CENTER);
+        root.getChildren().addAll(pickerBox,gridBox);
+        root.setSpacing(15);
+        root.setPadding(new Insets(15));
 
+        calendarScene = new Scene(root);
 
         return calendarScene;
     }
