@@ -1,3 +1,9 @@
+/*
+ * This class is a logical model of a calendar.
+ * Specifically a Gregorian Calendar, in fact I 
+ * happen to use both the Calendar
+ * and GregorianCalendar API in this class
+ */
 package Calendar_Roberto_Aguinaga;
 
 import java.util.Calendar;
