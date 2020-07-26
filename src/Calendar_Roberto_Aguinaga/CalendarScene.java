@@ -12,14 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 
 
 public class CalendarScene {
     protected Scene calendarScene; // the main scene with a calendar.
+    protected AnchorPane root = new AnchorPane();
     protected VBox root = new VBox(); // top-level container for the
     // scene
     private DatePicker picker = new DatePicker(); // So users can
@@ -85,12 +86,15 @@ public class CalendarScene {
     }
 
     public Scene getCalendarScene() {
+        AnchorPane datePane = new AnchorPane();
+        AnchorPane.setTopAnchor(root, 0.0);
+        datePane.getChildren().add(root);
         createWeekHeader();
         createCalendar();
         root.setAlignment(Pos.CENTER);
         root.getChildren().addAll(picker, calendarGrid);
         root.setSpacing(15);
-        calendarScene = new Scene(root);
+        calendarScene = new Scene(datePane);
         return calendarScene;
     }
 }
