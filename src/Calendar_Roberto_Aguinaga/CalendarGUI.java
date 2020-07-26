@@ -40,6 +40,7 @@ public class CalendarGUI extends Application {
 
         // Create another HBox to house the actual calendar, which is a gridpane
         HBox calendarBox = new HBox();
+        calendarBox.setPrefSize(600, 30); // I need this to be large
         GridPane calendarGrid = new Gridpane();
 
         Scene scene = new Scene(root);
