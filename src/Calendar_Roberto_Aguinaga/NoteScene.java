@@ -8,6 +8,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.Node;
+
+import java.util.ArrayList;
 
 public class NoteScene {
     private Stage mainStage;
@@ -48,7 +51,11 @@ public class NoteScene {
     }
 
     private void setUpDisplayBox() {
+        ArrayList<String> notes = new noteHandler().readNotes();
         noteList = new ListView<>();
+        for (String note: notes) {
+            noteList.getItems().add(new CheckBox(note));
+        }
     }
 
     public Scene getScene(Stage mainStage, Scene calendarScene) {
@@ -58,11 +65,12 @@ public class NoteScene {
 
         // Set up VBoxes
         setUpWriteBox();
+        setUpDisplayBox();
 
         // Set up split pane.
         splitPane = new SplitPane();
-        splitPane.getItems().add(writeBox);
-        splitPane.setOrientation(Orientation.VERTICAL);
+        splitPane.getItems().addAll(writeBox,noteList);
+        splitPane.setOrientation(Orientation.HORIZONTAL);
 
         Scene noteScene = new Scene(splitPane, 1000, 900);
 
