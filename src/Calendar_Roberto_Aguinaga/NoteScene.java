@@ -8,9 +8,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class NoteScene {
-
+    private Stage mainStage;
     private Scene noteScene;
     private HBox buttonBox;
     private VBox writeBox = new VBox();
@@ -32,6 +33,13 @@ public class NoteScene {
         buttonBox = new HBox(returnButton,saveNote);
         buttonBox.setSpacing(15);
 
+        // Set up event handlers for buttons
+        returnButton.setOnAction(event -> {
+
+        });
+        saveNote.setOnAction(event -> {
+
+        });
         // Add to VBox
         writeBox.getChildren().addAll(writeArea,buttonBox);
     }
@@ -40,7 +48,11 @@ public class NoteScene {
 
     }
 
-    public Scene getScene() {
+    public Scene getScene(Stage mainStage) {
+        // Get ref to main stage, store it.
+        this.mainStage = mainStage;
+
+        // Set up splitpane.
         splitPane = new SplitPane();
         splitPane.getItems().add(writeBox);
         splitPane.setOrientation(Orientation.VERTICAL);
