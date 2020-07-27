@@ -66,7 +66,8 @@ public class CalendarScene {
         // row.
         for (int rows = 1; rows < WEEKROWS; rows++) {
             for (int cols = 0; cols < WEEKDAYS; cols++) {
-                // Create VBoxes for day cells
+
+                // Create VBoxes for day cells, add styleClass
                 VBox dayCell = new VBox(new Button("Hi"));
                 dayCell.getStyleClass().add("day-cell");
 
