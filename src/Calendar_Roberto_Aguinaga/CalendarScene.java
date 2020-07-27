@@ -46,12 +46,16 @@ public class CalendarScene {
         for (int i = 0; i < days.length; i++) {
             // Create HBoxes to put into header HBox. These HBoxes
             // will contain the labels that have the day names.
-            HBox lblBox = new HBox(new Label(days[i]));
+            Label lbl = new Label(days[i]);
+            HBox lblBox = new HBox(lbl);
 
             // Make sure that the HBoxes fill out the header HBox.
             HBox.setHgrow(lblBox, Priority.ALWAYS);
             lblBox.setMaxWidth(Double.MAX_VALUE);
-            //lblBox.setMinWidth(headerBox.getPrefWidth() / 7);
+
+            // Add style class to Hboxes and labels
+            lbl.getStyleClass().add("day-label");
+            lblBox.getStyleClass().add("header-row");
 
             // Add label HBoxes to header HBox
             calendarGrid.addRow(0,lblBox);
