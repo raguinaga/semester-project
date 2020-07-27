@@ -102,7 +102,7 @@ public class CalendarScene {
         // numbers for the days
         int gridCount = 1;
         int lblCount = 1;
-        int offset = model.
+        int offset = model.firstDay;
         for (Node node : calendarGrid.getChildren()) {
             VBox dayCell = (VBox) node;
 
