@@ -18,7 +18,7 @@ public class CalendarGUI extends Application {
     @Override
     public void start(Stage window) {
         // Create a calendar model with default constructor
-        CalendarModel cm = new CalendarModel();
+        //CalendarModel cm = new CalendarModel();
         // Get the starting scene
         Scene defaultScene =
                 new CalendarScene().getCalendarScene(window);
