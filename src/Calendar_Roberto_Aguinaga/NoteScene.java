@@ -6,9 +6,10 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-public class noteScene {
+public class NoteScene {
 
     private Scene noteScene;
     private HBox buttonBox;
@@ -18,10 +19,12 @@ public class noteScene {
     private Button returnButton;
     private Button saveNote;
     private TextArea writeArea;
+    private String date;
 
     private void setUpWriteBox() {
         writeArea = new TextArea();
         writeArea.setWrapText(true);
+        VBox.setVgrow(writeArea, Priority.ALWAYS);
 
         returnButton = new Button("Return to calendar view");
         saveNote = new Button("Save note");
@@ -34,7 +37,7 @@ public class noteScene {
     }
 
     private void setUpDisplayBox() {
-        
+
     }
 
     public Scene getNoteScene() {
@@ -42,6 +45,6 @@ public class noteScene {
         splitPane.getItems().add(writeBox);
         splitPane.setOrientation(Orientation.VERTICAL);
 
-        return noteScene;
+        return noteScene = new Scene(splitPane);
     }
 }
