@@ -10,7 +10,6 @@ package Calendar_Roberto_Aguinaga;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -73,10 +72,6 @@ public class CalendarScene {
                 VBox dayCell = new VBox();
                 dayCell.getStyleClass().add("day-cell");
 
-                // Make sure sizing for the cells consistent
-                //dayCell.setMinWidth(headerBox.getPrefWidth() / 7);
-                GridPane.setVgrow(dayCell, Priority.ALWAYS);
-
                 // on each cell, add an event handler to switch scenes.
                 dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
                         event -> {
@@ -88,7 +83,8 @@ public class CalendarScene {
             }
         }
 
-        // Have to also add row and column constraints
+        // Have to also add row and column constraints for consistent
+        // VBox size
         for (int i = 0; i < WEEKROWS; i++) {
             RowConstraints rc = new RowConstraints(90);
             calendarGrid.getRowConstraints().add(rc);
