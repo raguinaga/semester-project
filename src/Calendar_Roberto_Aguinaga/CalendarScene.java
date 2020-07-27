@@ -15,9 +15,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 
 public class CalendarScene {
+    private Stage mainStage;
+    private Scene noteScene;
     private Scene calendarScene; // the main scene with a calendar.
     private VBox root = new VBox();
     private DatePicker picker = new DatePicker(); // So users can
@@ -74,11 +77,11 @@ public class CalendarScene {
                 //dayCell.setMinWidth(headerBox.getPrefWidth() / 7);
                 GridPane.setVgrow(dayCell, Priority.ALWAYS);
 
-                // on each cell, add an event handler
-                /*dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                // on each cell, add an event handler to switch scenes.
+                dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
                         event -> {
-                            new NoteScene().getScene();
-                        });*/
+                            mainStage.setScene(new NoteScene().getScene());
+                        });
 
                 // Add VBoxes to the GridPane
                 calendarGrid.add(dayCell, cols, rows);
@@ -95,7 +98,10 @@ public class CalendarScene {
         }
     }
 
-    public Scene getCalendarScene() {
+    public Scene getCalendarScene(Stage mainStage) {
+        // Get reference to main stage, to add to dayCell event handler.
+        this.mainStage = mainStage;
+
         // Set up the gridpane
         createWeekHeader();
         createCalendar();
