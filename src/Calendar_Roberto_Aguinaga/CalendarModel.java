@@ -35,7 +35,7 @@ public class CalendarModel {
 
         LocalDate defaultDate = LocalDate.now();
         calendar = new GregorianCalendar(defaultDate.getYear(),
-                defaultDate.getMonthValue(), 1);
+                defaultDate.getMonthValue(), defaultDate.getDayOfMonth());
 
         switch (defaultDate.getMonthValue()) {
             case 1:
