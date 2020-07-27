@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 
 public class CalendarScene {
     private final int WEEKDAYS = 7; // days in a week
-    private final int WEEKROWS = 7; // I honestly just based
+    private final int WEEKROWS = 6; // I honestly just based
     private Stage mainStage;
     private Scene noteScene;
     private CalendarModel model;
@@ -33,9 +33,8 @@ public class CalendarScene {
     // for calendar.
     private HBox gridBox;
     private HBox headerBox;
-    private GridPane calendarGrid = new GridPane();// Container
-    // this off windows' calendar in the taskbar. It has one extra
-    // row for the days
+    private GridPane calendarGrid = new GridPane();
+    private Label nameLbl;
 
     /**
      * This method generates the weekday header.
@@ -46,20 +45,18 @@ public class CalendarScene {
         // Initialize headerBox properties
         headerBox = new HBox();
         headerBox.setAlignment(Pos.CENTER);
-        HBox.setHgrow(headerBox, Priority.NEVER);
-        headerBox.setMaxWidth(850);
+        headerBox.setMaxWidth(847); // try to match the gridpane width
 
-        // For loop set up Hboxes and labels.
+        // Set up internal Hboxes and labels.
         for (int i = 0; i < days.length; i++) {
-            // Create HBoxes these HBoxes will contain the labels
+            // Create HBoxes, these HBoxes will contain the labels
             // that have the day names.
             Label lbl = new Label(days[i]);
             HBox lblBox = new HBox(lbl);
 
-            // Make sure the
-           // HBox.setHgrow(lblBox, Priority.ALWAYS);
+            // Make sure the HBoxes fill up the header box HBox
+            HBox.setHgrow(lblBox, Priority.ALWAYS);
             lblBox.setAlignment(Pos.CENTER);
-            //lblBox.setPrefWidth(headerBox.getWidth() / 7);
 
             // Add style class to Hboxes and labels
             lbl.getStyleClass().add("day-label");
@@ -68,13 +65,13 @@ public class CalendarScene {
             // Add label HBoxes to header HBox
             headerBox.getChildren().add(lblBox);
         }
+        // Add style class to the header row
         headerBox.getStyleClass().add("header-box");
     }
 
     private void createCalendar() {
-        // Have to start at 1 for the rows loop because of the header
-        // row.
-        for (int rows = 1; rows < WEEKROWS; rows++) {
+        // Loop through the 6 rows, and add vboxes 7 times to each row
+        for (int rows = 0; rows < WEEKROWS; rows++) {
             for (int cols = 0; cols < WEEKDAYS; cols++) {
 
                 // Create VBoxes for day cells, add styleClass
@@ -94,8 +91,9 @@ public class CalendarScene {
         }
 
         // Have to also add row and column constraints for consistent
-        // VBox size
-        for (int i = 0; i < WEEKROWS; i++) {
+        // VBox size, this adds an extra row that I couldn't figure
+        // out how to avoid.
+        for (int i = 0; i < WEEKDAYS; i++) {
             RowConstraints rc = new RowConstraints(90);
             calendarGrid.getRowConstraints().add(rc);
             ColumnConstraints cc =
