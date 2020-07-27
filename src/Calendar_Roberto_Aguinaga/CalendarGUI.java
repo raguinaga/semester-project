@@ -19,7 +19,14 @@ public class CalendarGUI extends Application {
     public void start(Stage window) {
         // Create a calendar model with default constructor
         CalendarModel cm = new CalendarModel();
+        // Get the starting scene
         Scene defaultScene = new CalendarScene().getCalendarScene();
+
+        // Load the stylesheet
+        defaultScene.getStylesheets().add(this.getClass().getResource(
+                "./styleRules.css").toExternalForm());
+
+        // Set the scene and show the stage.
         window.setScene(defaultScene);
         window.setTitle("Calendar");
         window.show();
