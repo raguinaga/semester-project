@@ -1,12 +1,22 @@
+.header-box {
+    -fx-border-width: 2;
+    -fx-border-color: black;
+}
+
 .header-row {
+    -fx-border-width: 2;
+    -fx-border-color: black;
     -fx-background-color: #33adff;
 }
 
 .day-label {
+    -fx-text-alignment: center;
     -fx-text-fill: #ffffff;
 }
 
 .cal-grid {
+    -fx-border-width: 2;
+    -fx-border-color: black;
     -fx-grid-lines-visible: true;
     -fx-alignment: center;
 }
