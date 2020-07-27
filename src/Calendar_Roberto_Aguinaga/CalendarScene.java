@@ -11,6 +11,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -35,6 +36,7 @@ public class CalendarScene {
     private HBox headerBox;
     private GridPane calendarGrid = new GridPane();
     private Label nameLbl;
+    private Button goToDate;
 
     /**
      * This method generates the weekday header.
@@ -100,7 +102,7 @@ public class CalendarScene {
                     new ColumnConstraints(120);
             calendarGrid.getColumnConstraints().add(cc);
         }
-        // Set style classes
+        // Set style class for the grid
         calendarGrid.getStyleClass().add("cal-grid");
     }
 
@@ -136,8 +138,8 @@ public class CalendarScene {
 
             // Set up a label and HBox for displaying the Date above
             // the calendar
-            Label dateLbl = new Label(model.date);
-            HBox nameBox = new HBox(dateLbl);
+            nameLbl = new Label(model.date);
+            HBox nameBox = new HBox(nameLbl);
             nameBox.setAlignment(Pos.CENTER);
             nameBox.setMaxWidth(600);
             nameBox.setMinHeight(70);
@@ -148,18 +150,13 @@ public class CalendarScene {
             createCalendar();
             setDayLabels();
 
-            // Some more aesthetics adjustments
+            // Some more aesthetics adjustments, set up the calendar
+            // grid inside of its own hbox.
             pickerBox.setAlignment(Pos.TOP_CENTER);
-
             gridBox = new HBox(calendarGrid);
             gridBox.setAlignment(Pos.BOTTOM_CENTER);
-            gridBox.setSpacing(0);
-            gridBox.setPadding(new Insets(0));
-            gridBox.setPrefHeight(calendarGrid.getPrefHeight());
 
-
-            // Set up the anchors on the DatePicker / Gridpane
-            VBox.setVgrow(pickerBox, Priority.SOMETIMES);
+            // Final VBox setup
             root.setAlignment(Pos.CENTER);
             root.getChildren().addAll(pickerBox, nameBox, headerBox,
                     gridBox);
