@@ -16,7 +16,9 @@
 }
 
 .return-button {
-    -fx-alignment: center;
     -fx-text-alignment: center;
-    -fx-background-color: #00ff00;
+    -fx-background-color: #00cc66;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
 }
+
