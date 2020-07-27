@@ -43,14 +43,18 @@ public class noteHandler {
 
     public ArrayList<String> readNotes() {
         ArrayList<String> notes = new ArrayList<>();
-        File file = new File(model.date + ".txt");
 
-        try (Scanner noteScanner = new Scanner(file)) {
+        try {
+            File file = new File(model.date + ".txt");
+            Scanner noteScanner = new Scanner(file);
             while (noteScanner.hasNextLine()) {
                 notes.add(noteScanner.nextLine());
             }
-        } catch (FileNotFoundException foundException) {
-            System.err.println(foundException.getMessage());
+            noteScanner.close();
+        }  catch (NullPointerException e) {
+            System.err.println(e.getMessage());
+        } catch (FileNotFoundException notFoundException) {
+            System.err.println(notFoundException.getMessage());
         }
         return notes;
     }
