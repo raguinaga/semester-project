@@ -9,6 +9,7 @@ package Calendar_Roberto_Aguinaga;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -20,6 +21,7 @@ import javafx.stage.Stage;
 public class CalendarScene {
     private Stage mainStage;
     private Scene noteScene;
+    private CalendarModel model;
     private Scene calendarScene; // the main scene with a calendar.
     private VBox root = new VBox();
     private DatePicker picker = new DatePicker(); // So users can
@@ -69,7 +71,7 @@ public class CalendarScene {
             for (int cols = 0; cols < WEEKDAYS; cols++) {
 
                 // Create VBoxes for day cells, add styleClass
-                VBox dayCell = new VBox();
+                VBox dayCell  = new VBox();
                 dayCell.getStyleClass().add("day-cell");
 
                 // on each cell, add an event handler to switch scenes.
@@ -95,9 +97,24 @@ public class CalendarScene {
         }
     }
 
+    public void setDayLabels() {
+        // Go back through each node in the gridpane and add the
+        // numbers for the days
+        int gridCount = 1;
+        int lblCount = 1;
+        int offset = model.
+        for (Node node : calendarGrid.getChildren()) {
+            VBox dayCell = (VBox) node;
+
+        }
+
+    }
+
     public Scene getCalendarScene(Stage mainStage) {
         // Get reference to main stage, to add to dayCell event handler.
         this.mainStage = mainStage;
+
+        model = new CalendarModel();
 
         // Set up the gridpane
         createWeekHeader();
