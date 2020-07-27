@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class noteHandler {
+public class NoteHandler {
 
     private CalendarModel model;
 
