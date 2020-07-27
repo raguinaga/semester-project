@@ -77,7 +77,7 @@ public class CalendarScene {
                 // on each cell, add an event handler
                 /*dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
                         event -> {
-                            noteHandler.addNote(dayCell);
+                            new NoteScene().getScene();
                         });*/
 
                 // Add VBoxes to the GridPane
