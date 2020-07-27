@@ -75,7 +75,8 @@ public class CalendarScene {
                 // on each cell, add an event handler to switch scenes.
                 dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
                         event -> {
-                            mainStage.setScene(new NoteScene().getScene(mainStage));
+                            mainStage.setScene(new NoteScene().getScene(mainStage,
+                                    this.calendarScene));
                         });
 
                 // Add VBoxes to the GridPane
@@ -123,13 +124,5 @@ public class CalendarScene {
         calendarScene = new Scene(root,1000,900);
 
         return calendarScene;
-    }
-
-    public Scene getCurrentInstance() {
-        if (calendarScene == null) {
-            return new CalendarScene().getCalendarScene(mainStage);
-        } else {
-            return calendarScene;
-        }
     }
 }
