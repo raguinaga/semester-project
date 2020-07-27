@@ -41,16 +41,12 @@ public class CalendarScene {
     private void createWeekHeader() {
         String[] days = {"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"};
 
-        // This sets up the day labels in the
+        // For loop set up Hboxes and labels.
         for (int i = 0; i < days.length; i++) {
-            // Create HBoxes to put into header HBox. These HBoxes
+            // Create HBoxes these HBoxes
             // will contain the labels that have the day names.
             Label lbl = new Label(days[i]);
             HBox lblBox = new HBox(lbl);
-
-            // Make sure that the HBoxes fill out the header HBox.
-            HBox.setHgrow(lblBox, Priority.ALWAYS);
-            lblBox.setMaxWidth(Double.MAX_VALUE);
 
             // Add style class to Hboxes and labels
             lbl.getStyleClass().add("day-label");
@@ -94,13 +90,14 @@ public class CalendarScene {
         }
     }
 
-    public void setDayLabels() {
+    /*public void setDayLabels() {
         // Go back through each node in the gridpane and add the
         // numbers for the days
         int gridCount = 1;
         int lblCount = 1;
         int offset = model.firstDay;
         for (Node node : calendarGrid.getChildren()) {
+            
             VBox dayCell = (VBox) node;
             if (gridCount < offset) {
                 gridCount++;
@@ -116,7 +113,7 @@ public class CalendarScene {
         }
 
     }
-
+*/
     public Scene getCalendarScene(Stage mainStage) {
         // Get reference to main stage, to add to dayCell event handler.
         this.mainStage = mainStage;
@@ -126,6 +123,7 @@ public class CalendarScene {
         // Set up the gridpane
         createWeekHeader();
         createCalendar();
+        //setDayLabels();
 
         // Set style classes
         calendarGrid.getStyleClass().add("cal-grid");
