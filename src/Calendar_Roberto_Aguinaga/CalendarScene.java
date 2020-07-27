@@ -10,6 +10,7 @@ package Calendar_Roberto_Aguinaga;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -23,23 +24,22 @@ public class CalendarScene {
     private DatePicker picker = new DatePicker(); // So users can
     // move to other dates
     private HBox pickerBox = new HBox(picker);
-    protected HBox headerBox;
     protected HBox gridBox;
-    protected GridPane calendarGrid = new GridPane(); // Container
+    protected GridPane calendarGrid = new GridPane();// Container
     // for calendar.
 
 
 
     private final int WEEKDAYS = 7; // days in a week
-    private final int WEEKROWS = 6; // I honestly just based
-    // this off windows' calendar in the taskbar.
+    private final int WEEKROWS = 7; // I honestly just based
+    // this off windows' calendar in the taskbar. It has one extra
+    // row for the days
 
     /**
      * This method generates the weekday header.
      */
     private void createWeekHeader() {
-        headerBox = new HBox(); // top level hbox
-        headerBox.setPrefSize(600, 30); // Trying out sizes
+        calendarGrid.gridLinesVisibleProperty().set(true);
         String[] days = {"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"};
 
         // This sets up the day labels in the
@@ -51,13 +51,11 @@ public class CalendarScene {
             // Make sure that the HBoxes fill out the header HBox.
             HBox.setHgrow(lblBox, Priority.ALWAYS);
             lblBox.setMaxWidth(Double.MAX_VALUE);
-            lblBox.setMinWidth(headerBox.getPrefWidth() / 7);
+            //lblBox.setMinWidth(headerBox.getPrefWidth() / 7);
 
             // Add label HBoxes to header HBox
-            headerBox.getChildren().add(lblBox);
+            calendarGrid.addRow(0,lblBox);
         }
-        // Add header to calendarGrid
-        calendarGrid.addRow(0,headerBox);
     }
 
     private void createCalendar() {
@@ -66,7 +64,7 @@ public class CalendarScene {
         for (int rows = 1; rows < WEEKROWS; rows++) {
             for (int cols = 0; cols < WEEKDAYS; cols++) {
                 // Create VBoxes for day cells
-                VBox dayCell = new VBox(new Label("Hi"));
+                VBox dayCell = new VBox(new Button("Hi"));
 
                 // Make sure sizing for the cells consistent
                 //dayCell.setMinWidth(headerBox.getPrefWidth() / 7);
@@ -82,6 +80,15 @@ public class CalendarScene {
                 calendarGrid.add(dayCell, cols, rows);
             }
         }
+
+        // Have to also add row and column constraints
+        for (int i = 0; i < WEEKROWS; i++) {
+            RowConstraints rc = new RowConstraints(90);
+            calendarGrid.getRowConstraints().add(rc);
+            ColumnConstraints cc=
+                    new ColumnConstraints(120);
+            calendarGrid.getColumnConstraints().add(cc);
+        }
     }
 
     public Scene getCalendarScene() {
@@ -92,12 +99,14 @@ public class CalendarScene {
         //
         pickerBox.setAlignment(Pos.TOP_CENTER);
         gridBox = new HBox(calendarGrid);
-        gridBox.setAlignment(Pos.BASELINE_CENTER);
+        gridBox.setAlignment(Pos.BOTTOM_CENTER);
 
         HBox.setHgrow(gridBox, Priority.ALWAYS);
         HBox.setHgrow(calendarGrid, Priority.ALWAYS);
+
         // Set up the anchors on the DatePicker / Gridpane
-        root.setAlignment(Pos.CENTER);
+        VBox.setVgrow(gridBox, Priority.ALWAYS);
+        VBox.setVgrow(pickerBox, Priority.SOMETIMES);
         root.getChildren().addAll(pickerBox,gridBox);
         root.setSpacing(15);
         root.setPadding(new Insets(15));
