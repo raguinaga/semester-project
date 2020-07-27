@@ -3,9 +3,7 @@ package Calendar_Roberto_Aguinaga;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -13,7 +11,6 @@ import javafx.stage.Stage;
 
 public class NoteScene {
     private Stage mainStage;
-     private Scene noteScene;
     private Scene calendarScene;
     private HBox buttonBox;
     private VBox writeBox = new VBox();
@@ -22,6 +19,7 @@ public class NoteScene {
     private Button returnButton;
     private Button saveNote;
     private TextArea writeArea;
+    private ListView<CheckBox> noteList;
     private String date;
 
     private void setUpWriteBox() {
@@ -50,7 +48,7 @@ public class NoteScene {
     }
 
     private void setUpDisplayBox() {
-        
+        noteList = new ListView<>();
     }
 
     public Scene getScene(Stage mainStage, Scene calendarScene) {
@@ -66,7 +64,7 @@ public class NoteScene {
         splitPane.getItems().add(writeBox);
         splitPane.setOrientation(Orientation.VERTICAL);
 
-        noteScene = new Scene(splitPane,1000,900);
+        Scene noteScene = new Scene(splitPane, 1000, 900);
 
         // Apply style rules to this scene
         noteScene.getStylesheets().add(this.getClass().getResource(
