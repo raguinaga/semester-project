@@ -14,3 +14,9 @@
 .day-cell {
     -fx-background-color: #ffffff;
 }
+
+.return-button {
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-background-color: #00ff00;
+}
