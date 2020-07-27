@@ -20,7 +20,8 @@ public class CalendarGUI extends Application {
         // Create a calendar model with default constructor
         CalendarModel cm = new CalendarModel();
         // Get the starting scene
-        Scene defaultScene = new CalendarScene().getCalendarScene();
+        Scene defaultScene =
+                new CalendarScene().getCalendarScene(window);
 
         // Load the stylesheet
         defaultScene.getStylesheets().add(this.getClass().getResource(
