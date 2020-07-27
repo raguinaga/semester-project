@@ -18,14 +18,13 @@ import javafx.scene.layout.*;
 
 
 public class CalendarScene {
-    protected Scene calendarScene; // the main scene with a calendar.
-    protected VBox root = new VBox();
-    protected AnchorPane anchorPane = new AnchorPane();
+    private Scene calendarScene; // the main scene with a calendar.
+    private VBox root = new VBox();
     private DatePicker picker = new DatePicker(); // So users can
     // move to other dates
     private HBox pickerBox = new HBox(picker);
-    protected HBox gridBox;
-    protected GridPane calendarGrid = new GridPane();// Container
+    private HBox gridBox;
+    private GridPane calendarGrid = new GridPane();// Container
     // for calendar.
 
 
