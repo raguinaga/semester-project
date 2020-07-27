@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 
 
 public class CalendarScene {
+    private final int WEEKDAYS = 7; // days in a week
+    private final int WEEKROWS = 7; // I honestly just based
     private Stage mainStage;
     private Scene noteScene;
     private CalendarModel model;
@@ -27,14 +29,9 @@ public class CalendarScene {
     private DatePicker picker = new DatePicker(); // So users can
     // move to other dates
     private HBox pickerBox = new HBox(picker);
+    // for calendar.
     private HBox gridBox;
     private GridPane calendarGrid = new GridPane();// Container
-    // for calendar.
-
-
-
-    private final int WEEKDAYS = 7; // days in a week
-    private final int WEEKROWS = 7; // I honestly just based
     // this off windows' calendar in the taskbar. It has one extra
     // row for the days
 
@@ -60,7 +57,7 @@ public class CalendarScene {
             lblBox.getStyleClass().add("header-row");
 
             // Add label HBoxes to header HBox
-            calendarGrid.addRow(0,lblBox);
+            calendarGrid.addRow(0, lblBox);
         }
     }
 
@@ -71,7 +68,7 @@ public class CalendarScene {
             for (int cols = 0; cols < WEEKDAYS; cols++) {
 
                 // Create VBoxes for day cells, add styleClass
-                VBox dayCell  = new VBox();
+                VBox dayCell = new VBox();
                 dayCell.getStyleClass().add("day-cell");
 
                 // on each cell, add an event handler to switch scenes.
@@ -91,7 +88,7 @@ public class CalendarScene {
         for (int i = 0; i < WEEKROWS; i++) {
             RowConstraints rc = new RowConstraints(90);
             calendarGrid.getRowConstraints().add(rc);
-            ColumnConstraints cc=
+            ColumnConstraints cc =
                     new ColumnConstraints(120);
             calendarGrid.getColumnConstraints().add(cc);
         }
@@ -105,7 +102,17 @@ public class CalendarScene {
         int offset = model.firstDay;
         for (Node node : calendarGrid.getChildren()) {
             VBox dayCell = (VBox) node;
-
+            if (gridCount < offset) {
+                gridCount++;
+                dayCell.setStyle("-fx-background-color: #737373");
+            } else {
+                if (lblCount > model.daysInMonth) {
+                    dayCell.setStyle("-fx-background-color: #737373");
+                } else {
+                    Label numberLbl = new Label(Integer.toString(lblCount));
+                    dayCell.getChildren().add(numberLbl);
+                }
+            }
         }
 
     }
@@ -134,11 +141,11 @@ public class CalendarScene {
         // Set up the anchors on the DatePicker / Gridpane
         VBox.setVgrow(gridBox, Priority.ALWAYS);
         VBox.setVgrow(pickerBox, Priority.SOMETIMES);
-        root.getChildren().addAll(pickerBox,gridBox);
+        root.getChildren().addAll(pickerBox, gridBox);
         root.setSpacing(15);
         root.setPadding(new Insets(15));
 
-        calendarScene = new Scene(root,1000,900);
+        calendarScene = new Scene(root, 1000, 900);
 
         return calendarScene;
     }
