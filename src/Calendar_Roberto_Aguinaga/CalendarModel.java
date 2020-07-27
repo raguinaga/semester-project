@@ -19,11 +19,11 @@ public class CalendarModel {
      * and month.
      */
     protected String date;
-    protected static String monthName;
-    protected static int year;
-    protected static int month;
-    protected static int firstDay;
-    protected static int daysInMonth;
+    protected String monthName;
+    protected int year;
+    protected int month;
+    protected int firstDay;
+    protected int daysInMonth;
     protected GregorianCalendar calendar;
 
     /**
@@ -109,12 +109,12 @@ public class CalendarModel {
 
     }
 
-    public static CalendarModel getCurrentCalendar() {
+   /* public static CalendarModel getCurrentCalendar() {
         return new CalendarModel(year, month);
     }
 
     public static CalendarModel getDefaultInstance() {
         return new CalendarModel();
-    }
+    }*/
 }
 
