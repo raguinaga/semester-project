@@ -1,6 +1,7 @@
 package Calendar_Roberto_Aguinaga;
 
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Button;
@@ -12,10 +13,11 @@ import javafx.stage.Stage;
 
 public class NoteScene {
     private Stage mainStage;
-    private Scene noteScene;
+     private Scene noteScene;
+    private Scene calendarScene;
     private HBox buttonBox;
     private VBox writeBox = new VBox();
-    private VBox displayBox = new VBox();
+    //private VBox displayBox = new VBox();
     private SplitPane splitPane;
     private Button returnButton;
     private Button saveNote;
@@ -30,12 +32,15 @@ public class NoteScene {
         returnButton = new Button("Return to calendar view");
         saveNote = new Button("Save note");
 
+        returnButton.getStyleClass().add("return-button");
+
         buttonBox = new HBox(returnButton,saveNote);
         buttonBox.setSpacing(15);
+        buttonBox.setAlignment(Pos.CENTER);
 
         // Set up event handlers for buttons
         returnButton.setOnAction(event -> {
-
+            mainStage.setScene(calendarScene);
         });
         saveNote.setOnAction(event -> {
 
@@ -45,18 +50,28 @@ public class NoteScene {
     }
 
     private void setUpDisplayBox() {
-
+        
     }
 
-    public Scene getScene(Stage mainStage) {
+    public Scene getScene(Stage mainStage, Scene calendarScene) {
         // Get ref to main stage, store it.
         this.mainStage = mainStage;
+        this.calendarScene = calendarScene;
 
-        // Set up splitpane.
+        // Set up VBoxes
+        setUpWriteBox();
+
+        // Set up split pane.
         splitPane = new SplitPane();
         splitPane.getItems().add(writeBox);
         splitPane.setOrientation(Orientation.VERTICAL);
 
-        return noteScene = new Scene(splitPane,1000,900);
+        noteScene = new Scene(splitPane,1000,900);
+
+        // Apply style rules to this scene
+        noteScene.getStylesheets().add(this.getClass().getResource(
+                "./styleRules.css").toExternalForm());
+
+        return noteScene;
     }
 }
