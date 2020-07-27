@@ -100,12 +100,14 @@ public class CalendarScene {
                     new ColumnConstraints(120);
             calendarGrid.getColumnConstraints().add(cc);
         }
+        // Set style classes
+        calendarGrid.getStyleClass().add("cal-grid");
     }
 
     public void setDayLabels() {
         // Go back through each node in the gridpane and add the
         // numbers for the days
-        int gridCount = 1;
+        int gridCount = 2;
         int lblCount = 1;
         int offset = model.firstDay;
         for (Node node : calendarGrid.getChildren()) {
@@ -120,6 +122,7 @@ public class CalendarScene {
                     Label numberLbl = new Label(Integer.toString(lblCount));
                     dayCell.getChildren().add(numberLbl);
                 }
+                lblCount++;
             }
         }
     }
@@ -128,15 +131,19 @@ public class CalendarScene {
             // Get reference to main stage, to add to dayCell event handler.
             this.mainStage = mainStage;
 
+            // Create a new Calendar Model
             model = new CalendarModel();
 
-            // Set up the gridpane
+            // Set up a label and HBox for displaying the Date
+            Label dateLbl = new Label(model.date);
+            HBox nameBox = new HBox(dateLbl);
+            nameBox.setAlignment(Pos.CENTER);
+            nameBox.getStyleClass().add("name-label");
+
+            // Set up the Calendar grid
             createWeekHeader();
             createCalendar();
             setDayLabels();
-
-            // Set style classes
-            calendarGrid.getStyleClass().add("cal-grid");
 
             // Some more aesthetics adjustments
             pickerBox.setAlignment(Pos.TOP_CENTER);
@@ -147,12 +154,12 @@ public class CalendarScene {
             gridBox.setPadding(new Insets(0));
             gridBox.setPrefHeight(calendarGrid.getPrefHeight());
 
-            //HBox.setHgrow(gridBox, Priority.ALWAYS);
 
             // Set up the anchors on the DatePicker / Gridpane
             VBox.setVgrow(pickerBox, Priority.SOMETIMES);
             root.setAlignment(Pos.CENTER);
-            root.getChildren().addAll(pickerBox, headerBox, gridBox);
+            root.getChildren().addAll(pickerBox, nameBox, headerBox,
+                    gridBox);
             root.setSpacing(0);
             root.setPadding(new Insets(15));
 
