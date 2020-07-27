@@ -39,7 +39,6 @@ public class CalendarScene {
      * This method generates the weekday header.
      */
     private void createWeekHeader() {
-        calendarGrid.gridLinesVisibleProperty().set(true);
         String[] days = {"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"};
 
         // This sets up the day labels in the
@@ -69,6 +68,7 @@ public class CalendarScene {
             for (int cols = 0; cols < WEEKDAYS; cols++) {
                 // Create VBoxes for day cells
                 VBox dayCell = new VBox(new Button("Hi"));
+                dayCell.getStyleClass().add("day-cell");
 
                 // Make sure sizing for the cells consistent
                 //dayCell.setMinWidth(headerBox.getPrefWidth() / 7);
@@ -99,6 +99,9 @@ public class CalendarScene {
         // Set up the gridpane
         createWeekHeader();
         createCalendar();
+
+        // Set style classes
+        calendarGrid.getStyleClass().add("cal-grid");
 
         //
         pickerBox.setAlignment(Pos.TOP_CENTER);
