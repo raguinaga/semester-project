@@ -1,4 +1,15 @@
-.headerRow {
+.header-row {
     -fx-background-color: #33adff;
-    -fx-text-fill: #ffffff
+}
+
+.day-label {
+    -fx-text-fill: #ffffff;
+}
+
+.cal-grid {
+    -fx-grid-lines-visible: true;
+}
+
+.day-cell {
+    -fx-background-color: #ffffff;
 }
