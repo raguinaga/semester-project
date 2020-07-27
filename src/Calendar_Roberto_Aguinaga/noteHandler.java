@@ -18,26 +18,23 @@ public class noteHandler {
 
     public void writeNote(CalendarModel cm, String notes) {
         boolean flag = checkIfNoteExists(cm);
+        String filename = cm.date + ".txt";
+        File file = new File(filename);
         if (!flag) {
-            String filename = cm.date + ".txt";
-            File file = new File(filename);
-
-
-            try {
-                file.createNewFile();
-                FileWriter fileWriter = new FileWriter(file, false);
-                PrintWriter printWriter = new PrintWriter(fileWriter);
+            try (
+                 FileWriter fileWriter = new FileWriter(file, false);
+                 PrintWriter printWriter = new PrintWriter(fileWriter)){
                 printWriter.println(notes);
-                printWriter.close();
-                fileWriter.close();
             } catch (IOException ioException) {
                 System.err.println(ioException.getMessage());
             } // End try-catch clause
         } else {
-            try {
-               FileWriter fWriter = new FileWriter(file, true);
-            }
-        }
+            try (FileWriter fWriter = new FileWriter(filename, true);
+                 PrintWriter pWriter = new PrintWriter(fWriter)) {
 
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+        } // end of if-else statement
     }
 }
