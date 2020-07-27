@@ -40,7 +40,7 @@ public class NoteScene {
 
     }
 
-    public Scene getNoteScene() {
+    public Scene getScene() {
         splitPane = new SplitPane();
         splitPane.getItems().add(writeBox);
         splitPane.setOrientation(Orientation.VERTICAL);
