@@ -22,6 +22,7 @@ public class CalendarModel {
     protected static String monthName;
     protected static int year;
     protected static int month;
+    protected static int firstDay;
     protected static int daysInMonth;
     protected GregorianCalendar calendar;
 
@@ -63,6 +64,7 @@ public class CalendarModel {
                 monthName = "December";
         }
 
+        firstDay = calendar.get(Calendar.DAY_OF_WEEK);
         daysInMonth =
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         year = calendar.get(Calendar.YEAR);
@@ -99,6 +101,7 @@ public class CalendarModel {
             case 12:
                 monthName = "December";
         }
+        firstDay = calendar.get(Calendar.DAY_OF_WEEK);
         daysInMonth =
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         year = calendar.get(Calendar.YEAR);
