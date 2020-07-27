@@ -18,6 +18,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 
+
 public class CalendarScene {
     private final int WEEKDAYS = 7; // days in a week
     private final int WEEKROWS = 7; // I honestly just based
@@ -31,6 +32,7 @@ public class CalendarScene {
     private HBox pickerBox = new HBox(picker);
     // for calendar.
     private HBox gridBox;
+    private HBox headerBox;
     private GridPane calendarGrid = new GridPane();// Container
     // this off windows' calendar in the taskbar. It has one extra
     // row for the days
@@ -41,20 +43,32 @@ public class CalendarScene {
     private void createWeekHeader() {
         String[] days = {"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"};
 
+        // Initialize headerBox properties
+        headerBox = new HBox();
+        headerBox.setAlignment(Pos.CENTER);
+        HBox.setHgrow(headerBox, Priority.NEVER);
+        headerBox.setMaxWidth(850);
+
         // For loop set up Hboxes and labels.
         for (int i = 0; i < days.length; i++) {
-            // Create HBoxes these HBoxes
-            // will contain the labels that have the day names.
+            // Create HBoxes these HBoxes will contain the labels
+            // that have the day names.
             Label lbl = new Label(days[i]);
             HBox lblBox = new HBox(lbl);
+
+            // Make sure the
+           // HBox.setHgrow(lblBox, Priority.ALWAYS);
+            lblBox.setAlignment(Pos.CENTER);
+            //lblBox.setPrefWidth(headerBox.getWidth() / 7);
 
             // Add style class to Hboxes and labels
             lbl.getStyleClass().add("day-label");
             lblBox.getStyleClass().add("header-row");
 
             // Add label HBoxes to header HBox
-            calendarGrid.addRow(0, lblBox);
+            headerBox.getChildren().add(lblBox);
         }
+        headerBox.getStyleClass().add("header-box");
     }
 
     private void createCalendar() {
@@ -90,61 +104,62 @@ public class CalendarScene {
         }
     }
 
-    /*public void setDayLabels() {
+    public void setDayLabels() {
         // Go back through each node in the gridpane and add the
         // numbers for the days
         int gridCount = 1;
         int lblCount = 1;
         int offset = model.firstDay;
         for (Node node : calendarGrid.getChildren()) {
-            
             VBox dayCell = (VBox) node;
             if (gridCount < offset) {
                 gridCount++;
-                dayCell.setStyle("-fx-background-color: #737373");
+                node.setStyle("-fx-background-color: #737373");
             } else {
                 if (lblCount > model.daysInMonth) {
-                    dayCell.setStyle("-fx-background-color: #737373");
+                    node.setStyle("-fx-background-color: #737373");
                 } else {
                     Label numberLbl = new Label(Integer.toString(lblCount));
                     dayCell.getChildren().add(numberLbl);
                 }
             }
         }
-
     }
-*/
-    public Scene getCalendarScene(Stage mainStage) {
-        // Get reference to main stage, to add to dayCell event handler.
-        this.mainStage = mainStage;
 
-        model = new CalendarModel();
+        public Scene getCalendarScene (Stage mainStage){
+            // Get reference to main stage, to add to dayCell event handler.
+            this.mainStage = mainStage;
 
-        // Set up the gridpane
-        createWeekHeader();
-        createCalendar();
-        //setDayLabels();
+            model = new CalendarModel();
 
-        // Set style classes
-        calendarGrid.getStyleClass().add("cal-grid");
+            // Set up the gridpane
+            createWeekHeader();
+            createCalendar();
+            setDayLabels();
 
-        //
-        pickerBox.setAlignment(Pos.TOP_CENTER);
-        gridBox = new HBox(calendarGrid);
-        gridBox.setAlignment(Pos.BOTTOM_CENTER);
+            // Set style classes
+            calendarGrid.getStyleClass().add("cal-grid");
 
-        HBox.setHgrow(gridBox, Priority.ALWAYS);
-        HBox.setHgrow(calendarGrid, Priority.ALWAYS);
+            // Some more aesthetics adjustments
+            pickerBox.setAlignment(Pos.TOP_CENTER);
 
-        // Set up the anchors on the DatePicker / Gridpane
-        VBox.setVgrow(gridBox, Priority.ALWAYS);
-        VBox.setVgrow(pickerBox, Priority.SOMETIMES);
-        root.getChildren().addAll(pickerBox, gridBox);
-        root.setSpacing(15);
-        root.setPadding(new Insets(15));
+            gridBox = new HBox(calendarGrid);
+            gridBox.setAlignment(Pos.BOTTOM_CENTER);
+            gridBox.setSpacing(0);
+            gridBox.setPadding(new Insets(0));
+            gridBox.setPrefHeight(calendarGrid.getPrefHeight());
 
-        calendarScene = new Scene(root, 1000, 900);
+            //HBox.setHgrow(gridBox, Priority.ALWAYS);
 
-        return calendarScene;
+            // Set up the anchors on the DatePicker / Gridpane
+            VBox.setVgrow(pickerBox, Priority.SOMETIMES);
+            root.setAlignment(Pos.CENTER);
+            root.getChildren().addAll(pickerBox, headerBox, gridBox);
+            root.setSpacing(0);
+            root.setPadding(new Insets(15));
+
+            calendarScene = new Scene(root, 1000, 900);
+
+            return calendarScene;
+        }
     }
-}
