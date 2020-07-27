@@ -8,34 +8,34 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.Node;
+
 
 import java.util.ArrayList;
 
 public class NoteScene {
     private Stage mainStage;
     private Scene calendarScene;
-    private HBox buttonBox;
+    private CalendarModel model;
     private VBox writeBox = new VBox();
-    //private VBox displayBox = new VBox();
-    private SplitPane splitPane;
-    private Button returnButton;
-    private Button saveNote;
-    private TextArea writeArea;
     private ListView<CheckBox> noteList;
-    private String date;
+    private NoteHandler nh;
+
 
     private void setUpWriteBox() {
-        writeArea = new TextArea();
+        // Set up writing area
+        TextArea writeArea = new TextArea();
         writeArea.setWrapText(true);
         VBox.setVgrow(writeArea, Priority.ALWAYS);
 
-        returnButton = new Button("Return to calendar view");
-        saveNote = new Button("Save note");
+        // Set up buttons to save note or return to calendar view
+        Button returnButton = new Button("Return to calendar view");
+        Button saveNote = new Button("Save note");
 
+        // Add style classes
         returnButton.getStyleClass().add("return-button");
 
-        buttonBox = new HBox(returnButton,saveNote);
+        // Put buttons in an HBox, set properties
+        HBox buttonBox = new HBox(returnButton, saveNote);
         buttonBox.setSpacing(15);
         buttonBox.setAlignment(Pos.CENTER);
 
@@ -47,28 +47,34 @@ public class NoteScene {
 
         });
         // Add to VBox
-        writeBox.getChildren().addAll(writeArea,buttonBox);
+        writeBox.getChildren().addAll(writeArea, buttonBox);
     }
 
     private void setUpDisplayBox() {
-        ArrayList<String> notes = new noteHandler().readNotes();
+        ArrayList<String> notes = new NoteHandler().readNotes();
         noteList = new ListView<>();
         for (String note: notes) {
             noteList.getItems().add(new CheckBox(note));
         }
     }
 
-    public Scene getScene(Stage mainStage, Scene calendarScene) {
+    public Scene getScene(Stage mainStage, Scene calendarScene,
+                          CalendarModel model) {
         // Get ref to main stage, store it.
         this.mainStage = mainStage;
         this.calendarScene = calendarScene;
+        this.model = model;
+
+        // Setup a new noteHandler object
+        nh = new NoteHandler();
 
         // Set up VBoxes
         setUpWriteBox();
         setUpDisplayBox();
 
         // Set up split pane.
-        splitPane = new SplitPane();
+        //private VBox displayBox = new VBox();
+        SplitPane splitPane = new SplitPane();
         splitPane.getItems().addAll(writeBox,noteList);
         splitPane.setOrientation(Orientation.HORIZONTAL);
 
