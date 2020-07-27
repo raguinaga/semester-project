@@ -72,8 +72,8 @@ public class CalendarModel {
         date = defaultDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
-    public CalendarModel(int year, int month) {
-        calendar = new GregorianCalendar(year, month, 1);
+    public CalendarModel(int year, int month, int day) {
+        calendar = new GregorianCalendar(year, month, day);
 
         switch (month) {
             case 1:
