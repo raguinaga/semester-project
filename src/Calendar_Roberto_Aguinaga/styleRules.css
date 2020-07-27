@@ -7,6 +7,15 @@
     -fx-background-color: #33adff;
 }
 
+.name-label {
+    -fx-border-width: 2;
+    -fx-border-color: black;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20;
+    -fx-font-weight: bolder;
+    -fx-background-color: #ffff66;
+}
+
 .day-label {
     -fx-text-alignment: center;
     -fx-text-fill: #ffffff;
