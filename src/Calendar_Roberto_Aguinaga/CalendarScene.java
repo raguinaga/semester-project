@@ -134,10 +134,13 @@ public class CalendarScene {
             // Create a new Calendar Model
             model = new CalendarModel();
 
-            // Set up a label and HBox for displaying the Date
+            // Set up a label and HBox for displaying the Date above
+            // the calendar
             Label dateLbl = new Label(model.date);
             HBox nameBox = new HBox(dateLbl);
             nameBox.setAlignment(Pos.CENTER);
+            nameBox.setMaxWidth(600);
+            nameBox.setMinHeight(70);
             nameBox.getStyleClass().add("name-label");
 
             // Set up the Calendar grid
@@ -160,7 +163,7 @@ public class CalendarScene {
             root.setAlignment(Pos.CENTER);
             root.getChildren().addAll(pickerBox, nameBox, headerBox,
                     gridBox);
-            root.setSpacing(0);
+            root.setSpacing(5);
             root.setPadding(new Insets(15));
 
             calendarScene = new Scene(root, 1000, 900);
