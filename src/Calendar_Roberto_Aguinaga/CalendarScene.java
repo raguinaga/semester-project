@@ -138,7 +138,7 @@ public class CalendarScene {
 
             // Set up a label and HBox for displaying the Date above
             // the calendar
-            nameLbl = new Label(model.date);
+            nameLbl = new Label(model.dateString);
             HBox nameBox = new HBox(nameLbl);
             nameBox.setAlignment(Pos.CENTER);
             nameBox.setMaxWidth(600);
