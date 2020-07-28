@@ -19,7 +19,6 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 
-
 public class CalendarScene {
     private final int WEEKDAYS = 7; // days in a week
     private final int WEEKROWS = 6; // I honestly just based
@@ -129,42 +128,44 @@ public class CalendarScene {
         }
     }
 
-        public Scene getCalendarScene (Stage mainStage){
-            // Get reference to main stage, to add to dayCell event handler.
-            this.mainStage = mainStage;
+    
 
-            // Create a new Calendar Model
-            model = new CalendarModel();
+    public Scene getCalendarScene(Stage mainStage) {
+        // Get reference to main stage, to add to dayCell event handler.
+        this.mainStage = mainStage;
 
-            // Set up a label and HBox for displaying the Date above
-            // the calendar
-            nameLbl = new Label(model.monthName);
-            HBox nameBox = new HBox(nameLbl);
-            nameBox.setAlignment(Pos.CENTER);
-            nameBox.setMaxWidth(600);
-            nameBox.setMinHeight(70);
-            nameBox.getStyleClass().add("name-label");
+        // Create a new Calendar Model
+        model = new CalendarModel();
 
-            // Set up the Calendar grid
-            createWeekHeader();
-            createCalendar();
-            setDayLabels();
+        // Set up a label and HBox for displaying the Date above
+        // the calendar
+        nameLbl = new Label(model.monthName);
+        HBox nameBox = new HBox(nameLbl);
+        nameBox.setAlignment(Pos.CENTER);
+        nameBox.setMaxWidth(600);
+        nameBox.setMinHeight(70);
+        nameBox.getStyleClass().add("name-label");
 
-            // Some more aesthetics adjustments, set up the calendar
-            // grid inside of its own hbox.
-            pickerBox.setAlignment(Pos.TOP_CENTER);
-            gridBox = new HBox(calendarGrid);
-            gridBox.setAlignment(Pos.BOTTOM_CENTER);
+        // Set up the Calendar grid
+        createWeekHeader();
+        createCalendar();
+        setDayLabels();
 
-            // Final VBox setup
-            root.setAlignment(Pos.CENTER);
-            root.getChildren().addAll(pickerBox, nameBox, headerBox,
-                    gridBox);
-            root.setSpacing(5);
-            root.setPadding(new Insets(15));
+        // Some more aesthetics adjustments, set up the calendar
+        // grid inside of its own hbox.
+        pickerBox.setAlignment(Pos.TOP_CENTER);
+        gridBox = new HBox(calendarGrid);
+        gridBox.setAlignment(Pos.BOTTOM_CENTER);
 
-            calendarScene = new Scene(root, 1000, 900);
+        // Final VBox setup
+        root.setAlignment(Pos.CENTER);
+        root.getChildren().addAll(pickerBox, nameBox, headerBox,
+                gridBox);
+        root.setSpacing(5);
+        root.setPadding(new Insets(15));
 
-            return calendarScene;
-        }
+        calendarScene = new Scene(root, 1000, 900);
+
+        return calendarScene;
     }
+}
