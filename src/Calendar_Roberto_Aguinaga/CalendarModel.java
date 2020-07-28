@@ -141,7 +141,11 @@ public class CalendarModel {
                 monthName = "December " + year;
                 break;
         }
-        
+
+        YearMonth yearMonth = YearMonth.of(date.getYear(),
+                date.getMonth());
+        LocalDate firstDate = yearMonth.atDay(1);
+        firstDay = firstDate.getDayOfWeek().getValue();
         daysInMonth =
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         year = calendar.get(Calendar.YEAR);
