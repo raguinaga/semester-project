@@ -29,7 +29,7 @@ public class CalendarScene {
     private VBox root = new VBox();
     private DatePicker picker = new DatePicker(); // So users can
     // move to other dates
-    private HBox pickerBox = new HBox(picker);
+    private HBox pickerBox = new HBox();
     // for calendar.
     private HBox gridBox;
     private HBox headerBox;
@@ -110,10 +110,10 @@ public class CalendarScene {
         // numbers for the days
         int gridCount = 1;
         int lblCount = 1;
-        int offset = model.getFirstDay();
+        int offset = model.firstDay;
         for (Node node : calendarGrid.getChildren()) {
             VBox dayCell = (VBox) node;
-            if (gridCount < offset) {
+            if (gridCount <= offset) {
                 gridCount++;
                 node.setStyle("-fx-background-color: #737373");
             } else {
@@ -128,7 +128,13 @@ public class CalendarScene {
         }
     }
 
-    
+    private void goToCalendar() {
+        goToDate = new Button("Go to date");
+        goToDate.setOnMouseClicked(event -> {
+            this.model = new CalendarModel(picker.getValue());
+            mainStage.setScene(getCalendarScene(mainStage));
+        });
+    }
 
     public Scene getCalendarScene(Stage mainStage) {
         // Get reference to main stage, to add to dayCell event handler.
@@ -153,6 +159,7 @@ public class CalendarScene {
 
         // Some more aesthetics adjustments, set up the calendar
         // grid inside of its own hbox.
+        pickerBox.getChildren().addAll(picker, goToDate);
         pickerBox.setAlignment(Pos.TOP_CENTER);
         gridBox = new HBox(calendarGrid);
         gridBox.setAlignment(Pos.BOTTOM_CENTER);
