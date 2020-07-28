@@ -45,7 +45,6 @@ public class NoteHandler {
 
     public ArrayList<String> readNotes() {
         ArrayList<String> notes = new ArrayList<>();
-        System.err.println(model);
         try {
             File file = new File(model.dateString + ".txt");
             if (file.exists()) {
