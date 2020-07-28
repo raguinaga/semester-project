@@ -7,8 +7,10 @@
 package Calendar_Roberto_Aguinaga;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class CalendarModel {
@@ -76,7 +78,11 @@ public class CalendarModel {
                 break;
         }
 
-        firstDay = calendar.get(Calendar.DAY_OF_WEEK);
+        YearMonth yearMonth = YearMonth.of(defaultDate.getYear(),
+                defaultDate.getMonth());
+        LocalDate firstDate = yearMonth.atDay(1);
+        firstDay = firstDate.getDayOfWeek().getValue();
+        System.out.println(firstDay);
         daysInMonth =
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         year = calendar.get(Calendar.YEAR);
@@ -84,8 +90,13 @@ public class CalendarModel {
         dateString = defaultDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
-    public CalendarModel(int year, int month, int day) {
-        calendar = new GregorianCalendar(year, month, day);
+    public CalendarModel(LocalDate date) {
+        int year, month, day;
+        year = date.getYear();
+        month = date.getMonthValue();
+        day = date.getDayOfMonth();
+        calendar = new GregorianCalendar(date.getYear(),
+                date.getMonthValue(), date.getDayOfMonth());
 
         switch (month) {
             case 1:
@@ -125,20 +136,13 @@ public class CalendarModel {
                 monthName = "December " + year;
                 break;
         }
-        firstDay = calendar.get(Calendar.DAY_OF_WEEK);
+        firstDay = calendar.get(Calendar.DATE);
         daysInMonth =
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
+    }
 
-    }
-    public int getFirstDay() {
-        LocalDate date = LocalDate.now();
-        GregorianCalendar gc = new GregorianCalendar(date.getYear(),
-                date.getMonthValue(),1);
-        System.out.println(gc.get(Calendar.DATE));
-        System.out.println(gc.DAY_OF_WEEK);
-        return gc.get(gc.DAY_OF_WEEK);
-    }
+
 }
 
