@@ -45,7 +45,7 @@ public class NoteScene {
             mainStage.setScene(calendarScene);
         });
         saveNote.setOnAction(event -> {
-            nh.writeNote(model, writeArea.getText());
+            nh.writeNote(writeArea.getText());
         });
         // Add to VBox
         writeBox.getChildren().addAll(writeArea, buttonBox);
@@ -67,7 +67,7 @@ public class NoteScene {
         this.model = model;
 
         // Setup a new noteHandler object
-        nh = new NoteHandler();
+        nh = new NoteHandler(model);
 
         // Set up VBoxes
         setUpWriteBox();
