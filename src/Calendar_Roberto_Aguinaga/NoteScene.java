@@ -47,7 +47,6 @@ public class NoteScene {
         saveNote.setOnAction(event -> {
             nh.writeNote(writeArea.getText());
             updateNoteList();
-            noteList.refresh();
         });
         // Add to VBox
         writeBox.getChildren().addAll(writeArea, buttonBox);
@@ -63,6 +62,7 @@ public class NoteScene {
 
     public void updateNoteList() {
         ArrayList<String> notes = nh.readNotes();
+        noteList.getItems().clear();
         for (String note: notes) {
             noteList.getItems().add(new CheckBox(note));
         }
