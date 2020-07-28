@@ -9,9 +9,8 @@ public class NoteHandler {
     private CalendarModel model;
 
 
-    public boolean checkIfNoteExists(CalendarModel model) {
-        this.model = model;
-        File file = new File(model.date + ".txt");
+    public boolean checkIfNoteExists() {
+        File file = new File(model.dateString + ".txt");
         if (file.exists()) {
             return true;
         } else {
@@ -20,8 +19,9 @@ public class NoteHandler {
     }
 
     public void writeNote(CalendarModel cm, String notes) {
-        boolean flag = checkIfNoteExists(cm);
-        String filename = cm.date + ".txt";
+        this.model = cm;
+        boolean flag = checkIfNoteExists();
+        String filename = cm.dateString + ".txt";
         File file = new File(filename);
         if (!flag) {
             try (FileWriter fileWriter = new FileWriter(file, false);
@@ -42,18 +42,22 @@ public class NoteHandler {
 
     public ArrayList<String> readNotes() {
         ArrayList<String> notes = new ArrayList<>();
-
+        System.err.println(model);
         try {
-            File file = new File("../" + model.date + ".txt");
-            Scanner noteScanner = new Scanner(file);
-            while (noteScanner.hasNextLine()) {
-                notes.add(noteScanner.nextLine());
+            File file = new File(model.dateString + ".txt");
+            if (file.exists()) {
+                Scanner noteScanner = new Scanner(file);
+                while (noteScanner.hasNextLine()) {
+                    notes.add(noteScanner.nextLine());
+                }
+                noteScanner.close();
+            } else {
+                throw new FileNotFoundException();
             }
-            noteScanner.close();
         } catch (NullPointerException e) {
-            System.err.println(e.getMessage());
+            System.err.println("This is a null pointer exception");
         } catch (FileNotFoundException notFoundException) {
-            System.err.println(notFoundException.getMessage());
+            System.err.println("This is a file not found exception");
         }
         return notes;
     }
