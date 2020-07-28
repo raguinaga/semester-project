@@ -46,6 +46,7 @@ public class CalendarScene {
      * This method generates the weekday header.
      */
     private void createWeekHeader() {
+        // day names
         String[] days = {"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"};
 
         // Initialize headerBox properties
@@ -55,8 +56,8 @@ public class CalendarScene {
 
         // Set up internal Hboxes and labels.
         for (int i = 0; i < days.length; i++) {
-            // Create HBoxes, these HBoxes will contain the labels
-            // that have the day names.
+            // Create HBoxes / labels, these HBoxes will contain the
+            // labels that have the day names.
             Label lbl = new Label(days[i]);
             HBox lblBox = new HBox(lbl);
 
@@ -75,12 +76,16 @@ public class CalendarScene {
         headerBox.getStyleClass().add("header-box");
     }
 
+    /**
+     * Prepares the gridpane that makes up the body of the calendar.
+     */
     private void createCalendar() {
         // Loop through the 6 rows, and add vboxes 7 times to each row
         for (int rows = 0; rows < WEEKROWS; rows++) {
             for (int cols = 0; cols < WEEKDAYS; cols++) {
 
-                // Create VBoxes for day cells, add styleClass
+                // Create VBoxes for day cells, add styleClass to
+                // each one
                 VBox dayCell = new VBox();
                 dayCell.getStyleClass().add("day-cell");
 
@@ -94,7 +99,7 @@ public class CalendarScene {
                 // Add VBoxes to the GridPane
                 calendarGrid.add(dayCell, cols, rows);
             }
-        }
+        } // end of for-loop
 
         // Have to also add row and column constraints for consistent
         // VBox size, this adds an extra row that I couldn't figure
@@ -116,12 +121,18 @@ public class CalendarScene {
         int gridCount = 1;
         int lblCount = 1;
         int offset = model.firstDay;
+
         for (Node node : calendarGrid.getChildren()) {
-            VBox dayCell = (VBox) node;
+            VBox dayCell = (VBox) node; // have to cast nodes
+
+            // If the month does not start on sundy, make it dark, do
+            // not add number label
             if (gridCount <= offset) {
                 gridCount++;
                 node.setStyle("-fx-background-color: #737373");
             } else {
+                // if the number of nodes exceeds the days in the
+                // month, darken the days, do not add labels
                 if (lblCount > model.daysInMonth) {
                     node.setStyle("-fx-background-color: #737373");
                 } else {
@@ -133,13 +144,6 @@ public class CalendarScene {
         }
     }
 
-    private void goToCalendar() {
-        goToDate = new Button("Go to date");
-        goToDate.setOnMouseClicked(event -> {
-            this.model = new CalendarModel(picker.getValue());
-            mainStage.setScene(getCalendarScene(mainStage));
-        });
-    }
 
     public Scene getCalendarScene(Stage mainStage) {
         // Get reference to main stage, to add to dayCell event handler.
@@ -164,6 +168,11 @@ public class CalendarScene {
 
         // Some more aesthetics adjustments, set up the calendar
         // grid inside of its own hbox.
+        goToDate = new Button("Go to date");
+        goToDate.setOnMouseClicked(event -> {
+            this.model = new CalendarModel(picker.getValue());
+            mainStage.setScene(getCalendarScene(mainStage));
+        });
         pickerBox.getChildren().addAll(picker, goToDate);
         pickerBox.setAlignment(Pos.TOP_CENTER);
         gridBox = new HBox(calendarGrid);
