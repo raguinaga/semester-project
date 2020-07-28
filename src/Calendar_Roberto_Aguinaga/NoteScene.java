@@ -33,7 +33,7 @@ public class NoteScene {
 
         // Add style classes
         returnButton.getStyleClass().add("return-button");
-        //saveNote.getStyleClass().add();
+        saveNote.getStyleClass().add("save-button");
 
         // Put buttons in an HBox, set properties
         HBox buttonBox = new HBox(returnButton, saveNote);
