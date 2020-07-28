@@ -39,3 +39,10 @@
     -fx-font-weight: bold;
 }
 
+.save-button {
+    -fx-text-alignment: center;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #ff0000;
+    -fx-font-weight: bold;
+}
+
