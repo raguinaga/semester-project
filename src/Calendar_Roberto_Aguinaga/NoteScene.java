@@ -46,6 +46,7 @@ public class NoteScene {
         });
         saveNote.setOnAction(event -> {
             nh.writeNote(writeArea.getText());
+            updateNoteList();
             noteList.refresh();
         });
         // Add to VBox
@@ -55,6 +56,13 @@ public class NoteScene {
     private void setUpDisplayBox() {
         ArrayList<String> notes = nh.readNotes();
         noteList = new ListView<>();
+        for (String note: notes) {
+            noteList.getItems().add(new CheckBox(note));
+        }
+    }
+
+    public void updateNoteList() {
+        ArrayList<String> notes = nh.readNotes();
         for (String note: notes) {
             noteList.getItems().add(new CheckBox(note));
         }
@@ -71,8 +79,8 @@ public class NoteScene {
         nh = new NoteHandler(model);
 
         // Set up VBoxes
-        setUpWriteBox();
         setUpDisplayBox();
+        setUpWriteBox();
 
         // Set up split pane.
         //private VBox displayBox = new VBox();
