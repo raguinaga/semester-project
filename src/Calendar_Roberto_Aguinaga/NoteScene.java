@@ -44,14 +44,14 @@ public class NoteScene {
             mainStage.setScene(calendarScene);
         });
         saveNote.setOnAction(event -> {
-
+            nh.writeNote(model, writeArea.getText());
         });
         // Add to VBox
         writeBox.getChildren().addAll(writeArea, buttonBox);
     }
 
     private void setUpDisplayBox() {
-        ArrayList<String> notes = new NoteHandler().readNotes();
+        ArrayList<String> notes = nh.readNotes();
         noteList = new ListView<>();
         for (String note: notes) {
             noteList.getItems().add(new CheckBox(note));
