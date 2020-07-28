@@ -46,6 +46,7 @@ public class NoteScene {
         });
         saveNote.setOnAction(event -> {
             nh.writeNote(writeArea.getText());
+            noteList.refresh();
         });
         // Add to VBox
         writeBox.getChildren().addAll(writeArea, buttonBox);
