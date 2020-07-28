@@ -1,9 +1,6 @@
 /*
  * This class is meant to set up the graphical representation of a
- * calendar. It is abstract as it does not do much more than house a
- * few fields and methods necessary to set up the controls that make
- * up the calendar. It is not meant to be instantiated. I do not know
- * if this is best practice.
+ * calendar.
  */
 package Calendar_Roberto_Aguinaga;
 
@@ -21,21 +18,29 @@ import javafx.stage.Stage;
 
 public class CalendarScene {
     private final int WEEKDAYS = 7; // days in a week
-    private final int WEEKROWS = 6; // I honestly just based
-    private Stage mainStage;
-    private Scene noteScene;
-    private CalendarModel model;
+    private final int WEEKROWS = 6; // I honestly just based this off
+    // the windows taskbar calendar
+
+    // Javafx Fields for this scene.
+    private Stage mainStage; // reference to main stage
+    private CalendarModel model; // Calendar model
     private Scene calendarScene; // the main scene with a calendar.
-    private VBox root = new VBox();
-    private DatePicker picker = new DatePicker(); // So users can
-    // move to other dates
-    private HBox pickerBox = new HBox();
-    // for calendar.
-    private HBox gridBox;
-    private HBox headerBox;
-    private GridPane calendarGrid = new GridPane();
-    private Label nameLbl;
+    private VBox root = new VBox(); // root container for the whole
+    // scene
+
+    // So users can move to other dates
+    private DatePicker picker = new DatePicker();
     private Button goToDate;
+    private HBox pickerBox = new HBox(); // Box for the above two
+    // controls
+
+    // HBox for the calendar controls.
+    private HBox gridBox; // for the calendar grid
+    private HBox headerBox; // for the day labels
+    private GridPane calendarGrid = new GridPane();
+
+    // Label telling user what month / year they are in.
+    private Label nameLbl;
 
     /**
      * This method generates the weekday header.
