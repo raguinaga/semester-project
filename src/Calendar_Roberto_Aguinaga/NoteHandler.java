@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NoteHandler {
-
+    // A calendar model
     private CalendarModel model;
+
+    public NoteHandler(CalendarModel model) {
+        this.model = model;
+    }
 
 
     public boolean checkIfNoteExists() {
@@ -18,10 +22,9 @@ public class NoteHandler {
         }
     }
 
-    public void writeNote(CalendarModel cm, String notes) {
-        this.model = cm;
+    public void writeNote( String notes) {
         boolean flag = checkIfNoteExists();
-        String filename = cm.dateString + ".txt";
+        String filename = model.dateString + ".txt";
         File file = new File(filename);
         if (!flag) {
             try (FileWriter fileWriter = new FileWriter(file, false);
