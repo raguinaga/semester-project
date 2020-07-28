@@ -22,8 +22,8 @@ public class NoteScene {
 
 
     private void setUpWriteBox() {
-        // Set up writing area
-        TextArea writeArea = new TextArea();
+        // Set up writing area, make sure it fills the pane
+        TextArea writeArea = new TextArea("Enter your notes here!");
         writeArea.setWrapText(true);
         VBox.setVgrow(writeArea, Priority.ALWAYS);
 
@@ -33,6 +33,7 @@ public class NoteScene {
 
         // Add style classes
         returnButton.getStyleClass().add("return-button");
+        //saveNote.getStyleClass().add();
 
         // Put buttons in an HBox, set properties
         HBox buttonBox = new HBox(returnButton, saveNote);
