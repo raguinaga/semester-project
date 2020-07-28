@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class CalendarModel {
@@ -78,11 +77,17 @@ public class CalendarModel {
                 break;
         }
 
+        // I have to create YearMonth and LocalDate objects because
+        // Calendar's DAY_OF_WEEK apparently does not get changed by
+        // the set method, despite what the docs say. Also the getTime
+        // method works but returns a Date which has had virtually all
+        // methods deprecated in favor of ...wait for it... Calendar's
+        // non-working methods! (╯°□°）╯︵ ┻━┻
         YearMonth yearMonth = YearMonth.of(defaultDate.getYear(),
                 defaultDate.getMonth());
         LocalDate firstDate = yearMonth.atDay(1);
         firstDay = firstDate.getDayOfWeek().getValue();
-        System.out.println(firstDay);
+
         daysInMonth =
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         year = calendar.get(Calendar.YEAR);
@@ -136,7 +141,7 @@ public class CalendarModel {
                 monthName = "December " + year;
                 break;
         }
-        firstDay = calendar.get(Calendar.DATE);
+        
         daysInMonth =
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         year = calendar.get(Calendar.YEAR);
