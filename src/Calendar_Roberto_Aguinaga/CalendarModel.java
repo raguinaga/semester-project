@@ -40,28 +40,40 @@ public class CalendarModel {
         switch (defaultDate.getMonthValue()) {
             case 1:
                 monthName = "January";
+                break;
             case 2:
                 monthName = "February";
+                break;
             case 3:
                 monthName = "March";
+                break;
             case 4:
                 monthName = "April";
+                break;
             case 5:
                 monthName = "May";
+                break;
             case 6:
                 monthName = "June";
+                break;
             case 7:
                 monthName = "July";
+                break;
             case 8:
                 monthName = "August";
+                break;
             case 9:
                 monthName = "September";
+                break;
             case 10:
                 monthName = "October";
+                break;
             case 11:
                 monthName = "November";
+                break;
             case 12:
                 monthName = "December";
+                break;
         }
 
         firstDay = calendar.get(Calendar.DAY_OF_WEEK);
@@ -112,7 +124,8 @@ public class CalendarModel {
         LocalDate date = LocalDate.now();
         GregorianCalendar gc = new GregorianCalendar(date.getYear(),
                 date.getMonthValue(),1);
-        System.out.println();
+        gc.set(gc.DAY_OF_WEEK,gc.DATE);
+        System.out.println(gc.get(Calendar.DATE));
         System.out.println(gc.DAY_OF_WEEK);
         return gc.get(gc.DAY_OF_WEEK);
     }
