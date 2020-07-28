@@ -109,9 +109,9 @@ public class CalendarScene {
     public void setDayLabels() {
         // Go back through each node in the gridpane and add the
         // numbers for the days
-        int gridCount = 2;
+        int gridCount = 1;
         int lblCount = 1;
-        int offset = model.firstDay;
+        int offset = model.getFirstDay();
         for (Node node : calendarGrid.getChildren()) {
             VBox dayCell = (VBox) node;
             if (gridCount < offset) {
