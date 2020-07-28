@@ -9,7 +9,6 @@ package Calendar_Roberto_Aguinaga;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class CalendarModel {
@@ -19,7 +18,7 @@ public class CalendarModel {
      * generate the right starting date for the calendar given the year
      * and month.
      */
-    protected String date;
+    protected String dateString;
     protected String monthName;
     protected int year;
     protected int month;
@@ -70,7 +69,7 @@ public class CalendarModel {
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
-        date = defaultDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        dateString = defaultDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     public CalendarModel(int year, int month, int day) {
