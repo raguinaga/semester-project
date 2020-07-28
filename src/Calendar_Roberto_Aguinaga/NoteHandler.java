@@ -24,9 +24,8 @@ public class NoteHandler {
         String filename = cm.date + ".txt";
         File file = new File(filename);
         if (!flag) {
-            try (
-                    FileWriter fileWriter = new FileWriter(file, false);
-                    PrintWriter printWriter = new PrintWriter(fileWriter)) {
+            try (FileWriter fileWriter = new FileWriter(file, false);
+                 PrintWriter printWriter = new PrintWriter(fileWriter)) {
                 printWriter.println(notes);
             } catch (IOException ioException) {
                 System.err.println(ioException.getMessage());
@@ -45,13 +44,13 @@ public class NoteHandler {
         ArrayList<String> notes = new ArrayList<>();
 
         try {
-            File file = new File(model.date + ".txt");
+            File file = new File("../" + model.date + ".txt");
             Scanner noteScanner = new Scanner(file);
             while (noteScanner.hasNextLine()) {
                 notes.add(noteScanner.nextLine());
             }
             noteScanner.close();
-        }  catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             System.err.println(e.getMessage());
         } catch (FileNotFoundException notFoundException) {
             System.err.println(notFoundException.getMessage());
