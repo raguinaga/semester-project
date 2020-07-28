@@ -9,6 +9,7 @@ package Calendar_Roberto_Aguinaga;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class CalendarModel {
@@ -108,13 +109,13 @@ public class CalendarModel {
         month = calendar.get(Calendar.MONTH);
 
     }
-
-   /* public static CalendarModel getCurrentCalendar() {
-        return new CalendarModel(year, month);
+    public int getFirstDay() {
+        LocalDate date = LocalDate.now();
+        GregorianCalendar gc = new GregorianCalendar(date.getYear(),
+                date.getMonthValue(),1);
+        System.out.println();
+        System.out.println(gc.DAY_OF_WEEK);
+        return gc.get(gc.DAY_OF_WEEK);
     }
-
-    public static CalendarModel getDefaultInstance() {
-        return new CalendarModel();
-    }*/
 }
 
