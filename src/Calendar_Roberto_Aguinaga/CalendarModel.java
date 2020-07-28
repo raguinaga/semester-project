@@ -136,7 +136,6 @@ public class CalendarModel {
         LocalDate date = LocalDate.now();
         GregorianCalendar gc = new GregorianCalendar(date.getYear(),
                 date.getMonthValue(),1);
-        gc.set(gc.DAY_OF_WEEK,gc.DATE);
         System.out.println(gc.get(Calendar.DATE));
         System.out.println(gc.DAY_OF_WEEK);
         return gc.get(gc.DAY_OF_WEEK);
