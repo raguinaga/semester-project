@@ -39,40 +39,40 @@ public class CalendarModel {
 
         switch (defaultDate.getMonthValue()) {
             case 1:
-                monthName = "January";
+                monthName = "January" + defaultDate.getYear();
                 break;
             case 2:
-                monthName = "February";
+                monthName = "February" + defaultDate.getYear();
                 break;
             case 3:
-                monthName = "March";
+                monthName = "March" + defaultDate.getYear();
                 break;
             case 4:
-                monthName = "April";
+                monthName = "April" + defaultDate.getYear();
                 break;
             case 5:
-                monthName = "May";
+                monthName = "May" + defaultDate.getYear();
                 break;
             case 6:
-                monthName = "June";
+                monthName = "June" + defaultDate.getYear();
                 break;
             case 7:
-                monthName = "July";
+                monthName = "July" + defaultDate.getYear();
                 break;
             case 8:
-                monthName = "August";
+                monthName = "August" + defaultDate.getYear();
                 break;
             case 9:
-                monthName = "September";
+                monthName = "September" + defaultDate.getYear();
                 break;
             case 10:
-                monthName = "October";
+                monthName = "October" + defaultDate.getYear();
                 break;
             case 11:
-                monthName = "November";
+                monthName = "November" + defaultDate.getYear();
                 break;
             case 12:
-                monthName = "December";
+                monthName = "December" + defaultDate.getYear();
                 break;
         }
 
