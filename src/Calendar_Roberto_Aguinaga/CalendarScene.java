@@ -166,10 +166,14 @@ public class CalendarScene {
         createCalendar();
         setDayLabels();
 
-        // Some more aesthetics adjustments, set up the calendar
-        // grid inside of its own hbox.
+        // Set up the mechanism for switching to a new calendar scene
+        // I honestly should have put this into it's own method. but
+        // my time is limited and my patience in getting this
+        // calendar working has worn thin.
+
         goToDate = new Button("Go to date");
         goToDate.setOnMouseClicked(event -> {
+            this.model = null;
             this.model = new CalendarModel(picker.getValue());
             mainStage.setScene(getCalendarScene(mainStage));
         });
