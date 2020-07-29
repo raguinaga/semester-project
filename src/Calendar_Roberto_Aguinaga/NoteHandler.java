@@ -54,7 +54,7 @@ public class NoteHandler {
                 }
                 noteScanner.close();
             } else {
-                throw new FileNotFoundException();
+                notes.add("");
             }
         } catch (NullPointerException e) {
             System.err.println("This is a null pointer exception");
