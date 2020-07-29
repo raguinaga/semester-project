@@ -2,7 +2,8 @@
  * This class is a logical model of a calendar.
  * Specifically a Gregorian Calendar, in fact I
  * happen to use both the Calendar
- * and GregorianCalendar API to aide in this modeling.
+ * and GregorianCalendar API among other time APIs to aide in this
+ * modeling.
  */
 package Calendar_Roberto_Aguinaga;
 
@@ -79,10 +80,11 @@ public class CalendarModel {
 
         // I have to create YearMonth and LocalDate objects because
         // Calendar's DAY_OF_WEEK apparently does not get changed by
-        // the set method, despite what the docs say. Also the getTime
-        // method works but returns a Date which has had virtually all
-        // methods deprecated in favor of ...wait for it... Calendar's
-        // non-working methods! (╯°□°）╯︵ ┻━┻
+        // the Calendar.set method, despite what the docs say. Also the
+        // getTime method works but returns an object of the Date Class
+        // which has had virtually all methods deprecated in favor of
+        // ...wait for it... Calendar's non-working methods.
+        // (╯°□°）╯︵ ┻━┻
         YearMonth yearMonth = YearMonth.of(defaultDate.getYear(),
                 defaultDate.getMonth());
         LocalDate firstDate = yearMonth.atDay(1);
@@ -147,8 +149,6 @@ public class CalendarModel {
         firstDay = firstDate.getDayOfWeek().getValue();
         daysInMonth =
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
         dateString = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
