@@ -88,15 +88,29 @@ public class CalendarModel {
         YearMonth yearMonth = YearMonth.of(defaultDate.getYear(),
                 defaultDate.getMonth());
         LocalDate firstDate = yearMonth.atDay(1);
+        // Get the first day of the month so that the calendar
+        // gripane knows when to start adding number labels
         firstDay = firstDate.getDayOfWeek().getValue();
 
+        // Get the total days in the month so te Gridpane methods
+        // know when to stop adding numbers.
         daysInMonth =
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        // Get the year of the calendar
         year = calendar.get(Calendar.YEAR);
+        // Get the month of the calendar
         month = calendar.get(Calendar.MONTH);
+        // Make a nice string representation of the calendar date.
         dateString = defaultDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
+    /**
+     * Constructor which makes a Gregorian Calendar from a LocalDate
+     * object passed as a parameter.
+     *
+     * @param date A LocalDate object.
+     */
     public CalendarModel(LocalDate date) {
         int year, month, day;
         year = date.getYear();
@@ -146,9 +160,21 @@ public class CalendarModel {
         YearMonth yearMonth = YearMonth.of(date.getYear(),
                 date.getMonth());
         LocalDate firstDate = yearMonth.atDay(1);
+
+        // Get the first day of the month so that the calendar
+        // gripane knows when to start adding number labels
         firstDay = firstDate.getDayOfWeek().getValue();
+
+        // Get the total days in the month so te Gridpane methods
+        // know when to stop adding numbers.
         daysInMonth =
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        // Get the year of the calendar
+        year = calendar.get(Calendar.YEAR);
+        // Get the month of the calendar
+        month = calendar.get(Calendar.MONTH);
+        // Make a nice string representation of the calendar date.
         dateString = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
