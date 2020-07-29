@@ -1,5 +1,8 @@
-package Calendar_Roberto_Aguinaga;
+/*
+ * This package sets up the note scene for entering and viewing notes
+ */
 
+package Calendar_Roberto_Aguinaga;
 
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -19,9 +22,7 @@ public class NoteScene {
     private CalendarModel model;
     private VBox writeBox = new VBox();
     private ListView<CheckBox> noteList;
-    //private CheckBox chkBox;
-    private NoteHandler nh;
-    private String checkedNote;
+    private NoteHandler noteHandler;
 
 
     private void setUpWriteBox() {
@@ -48,7 +49,7 @@ public class NoteScene {
             mainStage.setScene(calendarScene);
         });
         saveNote.setOnAction(event -> {
-            nh.writeNote(writeArea.getText());
+            noteHandler.writeNote(writeArea.getText());
             updateNoteList();
         });
         // Add to VBox
@@ -59,7 +60,7 @@ public class NoteScene {
      * Sets up the initial view of the list.
      */
     private void setUpDisplayBox() {
-        ArrayList<String> notes = nh.readNotes();
+        ArrayList<String> notes = noteHandler.readNotes();
         noteList = new ListView<>();
         for (String note : notes) {
             CheckBox chkBox = new CheckBox(note);
@@ -81,7 +82,7 @@ public class NoteScene {
      * clunky to use but it was fast to put together.
      */
     public void updateNoteList() {
-        ArrayList<String> notes = nh.readNotes();
+        ArrayList<String> notes = noteHandler.readNotes();
         noteList.getItems().clear();
         for (String note : notes) {
             CheckBox chkBox = new CheckBox(note);
@@ -117,7 +118,7 @@ public class NoteScene {
         this.model = model;
 
         // Setup a new noteHandler object
-        nh = new NoteHandler(model);
+        noteHandler = new NoteHandler(model);
 
         // Set up VBoxes
         setUpDisplayBox();
