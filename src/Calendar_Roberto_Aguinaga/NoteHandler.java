@@ -23,10 +23,10 @@ public class NoteHandler {
     }
 
     public void writeNote( String notes) {
-        boolean flag = checkIfNoteExists();
+        // Make the file name based on the
         String filename = model.dateString + ".txt";
         File file = new File(filename);
-        if (!flag) {
+        if (!checkIfNoteExists()) {
             try (FileWriter fileWriter = new FileWriter(file, false);
                  PrintWriter printWriter = new PrintWriter(fileWriter)) {
                 printWriter.println(notes);
