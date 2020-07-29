@@ -10,6 +10,10 @@ import javafx.scene.Scene;
 
 public class CalendarGUI extends Application {
 
+    /**
+     * Starts the Gui program
+     * @param window The stage of this program
+     */
     @Override
     public void start(Stage window) {
 
@@ -23,6 +27,10 @@ public class CalendarGUI extends Application {
         window.show();
     }
 
+    /**
+     * Method main launches the program
+     * @param args Command-line args
+     */
     public static void main(String[] args) {
         launch(args);
     }
