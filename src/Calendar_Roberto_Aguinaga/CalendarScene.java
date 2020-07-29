@@ -159,7 +159,7 @@ public class CalendarScene {
 
     /**
      * The root of all my misery, switching over to a new date once
-     * goes well, switching twice however, throws a null pointer
+     * goes well, switching twice however throws a null pointer
      * exception which I cannot resolve. I have given up.
      */
     public void setUpDatePicker() {
