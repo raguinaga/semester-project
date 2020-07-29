@@ -147,6 +147,11 @@ public class CalendarScene {
         }
     }
 
+    /**
+     * The root of all my misery, switching over to a new date once
+     * goes well, switching twice however, throws a null pointer
+     * exception which I cannot resolve.
+     */
     public void setUpDatePicker() {
         goToDate = new Button("Go to date");
         goToDate.setOnMouseClicked(event -> {
@@ -167,6 +172,12 @@ public class CalendarScene {
         model = new CalendarModel(date);
     }
 
+    /**
+     * Sets up the calendar scene with a CalendarModel reference that
+     * has whatever the System date is as its date.
+     * @param mainStage
+     * @return
+     */
     public Scene getDefaultScene(Stage mainStage) {
         // Get reference to main stage, to add to dayCell event handler.
         this.mainStage = mainStage;
@@ -212,6 +223,15 @@ public class CalendarScene {
         return calendarScene;
     }
 
+    /**
+     * I could not get an if-else statement above to correctly assign
+     * the CalendarModel reference so this method does literally the
+     * same thing as getDefaultScene except it assigns the
+     * CalendarModel reference to the argument supplied by the caller
+     * of this function
+     * @param cm A CalendarModel object
+     * @return A Scene.
+     */
     public Scene getNewScene(CalendarModel cm) {
         // Make the model reference a new Cal Model
         model = cm;
