@@ -9,10 +9,10 @@ public class CalendarGUI extends Application {
 
     @Override
     public void start(Stage window) {
-        
+
         // Get the starting scene
         Scene defaultScene =
-                new CalendarScene().getCalendarScene(window);
+                new CalendarScene().getDefaultScene(window);
 
         // Load the stylesheet
         defaultScene.getStylesheets().add(this.getClass().getResource(
