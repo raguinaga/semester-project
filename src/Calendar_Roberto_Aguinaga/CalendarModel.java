@@ -100,8 +100,7 @@ public class CalendarModel {
         year = date.getYear();
         month = date.getMonthValue();
         day = date.getDayOfMonth();
-        calendar = new GregorianCalendar(date.getYear(),
-                date.getMonthValue(), date.getDayOfMonth());
+        calendar = new GregorianCalendar(year, month, day);
 
         switch (month) {
             case 1:
@@ -150,6 +149,7 @@ public class CalendarModel {
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
+        dateString = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
 
