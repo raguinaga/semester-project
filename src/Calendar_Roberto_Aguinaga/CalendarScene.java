@@ -160,14 +160,23 @@ public class CalendarScene {
                 mainStage.setScene(new CalendarScene().getNewScene(model));
             } catch (NullPointerException e) {
                 e.printStackTrace();
+                ErrorStage exitStage = new ErrorStage();
+
             }
         });
     }
 
+    /**
+     * Set up a new Calendar from the current system date
+     */
     public void setUpCalModel() {
         model = new CalendarModel();
     }
 
+    /**
+     * Sets up a new calendar model from a LocalDate object
+     * @param date A LocalDate object
+     */
     public void setUpCalModel(LocalDate date) {
         model = new CalendarModel(date);
     }
