@@ -41,9 +41,8 @@ public class NoteHandler {
      * (though I never got that to work quite right).
      * @param notes A string, for things that need to be done. I
      *              honestly should've named this "tasks"
-     * @throws IOException
      */
-    public void writeNote( String notes) throws IOException {
+    public void writeNote( String notes) {
         // Make the file name based on the
         String filename = model.dateString + ".txt";
         File file = new File(filename);
@@ -76,11 +75,8 @@ public class NoteHandler {
      * specific date even now...
      * @return An ArrayList of Strings containing notes / tasks /
      * whatever is in the file
-     * @throws NullPointerException
-     * @throws FileNotFoundException
      */
-    public ArrayList<String> readNotes() throws NullPointerException,
-            FileNotFoundException {
+    public ArrayList<String> readNotes() {
         ArrayList<String> notes = new ArrayList<>();
         try {
             // Make file object, check if it exist, if it does, start
