@@ -93,10 +93,20 @@ public class CalendarScene {
                 dayCell.getStyleClass().add("day-cell");
 
                 // on each cell, add an event handler to switch scenes.
+                // This also throws a null pointer exception when
+                // the model is not the default model for some
+                // reason??? Also set up a catch clause to just shut
+                // the program down somewhat gracefully, though I
+                // wish I could have included a pop message or
+                // something.
                 dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
                         event -> {
-                            mainStage.setScene(new NoteScene().getScene(mainStage,
-                                    this.calendarScene, model));
+                            try {
+                                mainStage.setScene(new NoteScene().getScene(mainStage,
+                                        this.calendarScene, model));
+                            } catch (NullPointerException e) {
+                                System.exit(-1);
+                            }
                         });
 
                 // Add VBoxes to the GridPane
@@ -159,7 +169,6 @@ public class CalendarScene {
             try {
                 mainStage.setScene(new CalendarScene().getNewScene(model));
             } catch (NullPointerException e) {
-                ErrorStage.showMessage();
                 System.exit(-1);
             }
         });
@@ -174,6 +183,7 @@ public class CalendarScene {
 
     /**
      * Sets up a new calendar model from a LocalDate object
+     *
      * @param date A LocalDate object
      */
     public void setUpCalModel(LocalDate date) {
@@ -183,6 +193,7 @@ public class CalendarScene {
     /**
      * Sets up the calendar scene with a CalendarModel reference that
      * has whatever the System date is as its date.
+     *
      * @param mainStage
      * @return
      */
@@ -237,6 +248,7 @@ public class CalendarScene {
      * same thing as getDefaultScene except it assigns the
      * CalendarModel reference to the argument supplied by the caller
      * of this function
+     *
      * @param cm A CalendarModel object
      * @return A Scene.
      */
