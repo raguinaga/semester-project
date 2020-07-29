@@ -17,14 +17,19 @@ import java.util.ArrayList;
 
 
 public class NoteScene {
-    private Stage mainStage;
-    private Scene calendarScene;
-    private CalendarModel model;
-    private VBox writeBox = new VBox();
-    private ListView<CheckBox> noteList;
-    private NoteHandler noteHandler;
+    private Stage mainStage; // ref to main stage, maybe this is
+    // causing my null pointer problems?
+    private Scene calendarScene; // Ref to previous calendar scene
+    private CalendarModel model; // calendar model, again may be
+    // cause of null pointer problems
+    private VBox writeBox = new VBox(); // VBox to house TextArea,
+    // and button HBox
+    private ListView<CheckBox> noteList; // ListView for checkboxes
+    private NoteHandler noteHandler; // IO file-handler object
 
-
+    /**
+     * Sets up the left VBox, text area, buttons and button HBox
+     */
     private void setUpWriteBox() {
         // Set up writing area, make sure it fills the pane
         TextArea writeArea = new TextArea("Enter your notes here!");
@@ -60,10 +65,15 @@ public class NoteScene {
      * Sets up the initial view of the list.
      */
     private void setUpDisplayBox() {
+        // Get strings that are notes
         ArrayList<String> notes = noteHandler.readNotes();
+        // Construct the list view
         noteList = new ListView<>();
+        // For loop sets up the Check boxes, adds event listeners to
+        // control styles.
         for (String note : notes) {
             CheckBox chkBox = new CheckBox(note);
+            // Add event listener
             chkBox.selectedProperty().
                     addListener(((observable, oldValue, newValue) -> {
                         if (newValue) {
@@ -72,6 +82,7 @@ public class NoteScene {
                             chkBox.getStyleClass().add("unchecked-box");
                         }
                     }));
+            // Add items to list view
             noteList.getItems().add(chkBox);
         }
     }
@@ -83,9 +94,11 @@ public class NoteScene {
      */
     public void updateNoteList() {
         ArrayList<String> notes = noteHandler.readNotes();
+        // Clear items in list view to avoid duplication.
         noteList.getItems().clear();
         for (String note : notes) {
             CheckBox chkBox = new CheckBox(note);
+            // Add listener
             chkBox.selectedProperty().
                     addListener(((observable, oldValue, newValue) -> {
                         if (newValue) {
@@ -94,6 +107,7 @@ public class NoteScene {
                             chkBox.getStyleClass().add("unchecked-box");
                         }
                     }));
+            // Add items to list view
             noteList.getItems().add(chkBox);
         }
     }
