@@ -1,3 +1,6 @@
+/*
+ * This class does little more than launch the main scene.
+ */
 package Calendar_Roberto_Aguinaga;
 
 import javafx.application.Application;
