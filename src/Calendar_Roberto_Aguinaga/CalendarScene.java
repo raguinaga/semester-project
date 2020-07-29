@@ -15,6 +15,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 
 public class CalendarScene {
     private final int WEEKDAYS = 7; // days in a week
@@ -22,19 +24,20 @@ public class CalendarScene {
     // the windows taskbar calendar
 
     // Javafx Fields for this scene.
-    private Stage mainStage; // reference to main stage
+    private Stage mainStage; // reference to main stage in calendar GUI
     private CalendarModel model; // Calendar model
+    private CalendarModel newModel;
     private Scene calendarScene; // the main scene with a calendar.
     private VBox root = new VBox(); // root container for the whole
     // scene
 
-    // So users can move to other dates
+    // Date picker control so users can move to other dates.
     private DatePicker picker = new DatePicker();
     private Button goToDate;
     private HBox pickerBox = new HBox(); // Box for the above two
     // controls
 
-    // HBox for the calendar controls.
+    // HBoxes for the calendar controls.
     private HBox gridBox; // for the calendar grid
     private HBox headerBox; // for the day labels
     private GridPane calendarGrid = new GridPane();
@@ -144,12 +147,27 @@ public class CalendarScene {
         }
     }
 
+    public void setUpDatePicker() {
+        goToDate = new Button("Go to date");
+        goToDate.setOnMouseClicked(event -> {
+            setUpCalModel(picker.getValue());
+            mainStage.setScene(new CalendarScene().getNewScene(model));
+        });
+    }
 
-    public Scene getCalendarScene(Stage mainStage) {
+    public void setUpCalModel() {
+        model = new CalendarModel();
+    }
+
+    public void setUpCalModel(LocalDate date) {
+        model = new CalendarModel(date);
+    }
+
+    public Scene getDefaultScene(Stage mainStage) {
         // Get reference to main stage, to add to dayCell event handler.
         this.mainStage = mainStage;
 
-        // Create a new Calendar Model
+        // Create a new Calendar Model based on the default date
         model = new CalendarModel();
 
         // Set up a label and HBox for displaying the Date above
@@ -161,30 +179,58 @@ public class CalendarScene {
         nameBox.setMinHeight(70);
         nameBox.getStyleClass().add("name-label");
 
-        // Set up the Calendar grid
+        // Set up the Calendar grid and date picker.
         createWeekHeader();
         createCalendar();
         setDayLabels();
+        setUpDatePicker();
 
-        // Set up the mechanism for switching to a new calendar scene
-        // I honestly should have put this into it's own method. but
-        // my time is limited and my patience in getting this
-        // calendar working has worn thin.
-
-        goToDate = new Button("Go to date");
-        goToDate.setOnMouseClicked(event -> {
-            this.model = null;
-            this.model = new CalendarModel(picker.getValue());
-            mainStage.setScene(getCalendarScene(mainStage));
-        });
+        // Set up the HBox for the date picker and button
         pickerBox.getChildren().addAll(picker, goToDate);
+        pickerBox.setSpacing(10);
         pickerBox.setAlignment(Pos.TOP_CENTER);
         gridBox = new HBox(calendarGrid);
         gridBox.setAlignment(Pos.BOTTOM_CENTER);
 
-        // Final VBox setup
+        // Final root VBox setup
         root.setAlignment(Pos.CENTER);
         root.getChildren().addAll(pickerBox, nameBox, headerBox,
+                gridBox);
+        root.setSpacing(5);
+        root.setPadding(new Insets(15));
+
+        calendarScene = new Scene(root, 1000, 900);
+
+        return calendarScene;
+    }
+
+    public Scene getNewScene(CalendarModel cm) {
+        // Make the model reference a new Cal Model
+        model = cm;
+
+        // Same Header Box/ date label stuff as above
+        nameLbl = new Label(model.monthName);
+        HBox dateLbl = new HBox(nameLbl);
+        dateLbl.setAlignment(Pos.CENTER);
+        dateLbl.setMaxWidth(600);
+        dateLbl.setMinHeight(70);
+        dateLbl.getStyleClass().add("name-label");
+
+        // Set up the Calendar grid and date picker.
+        createWeekHeader();
+        createCalendar();
+        setDayLabels();
+        setUpDatePicker();
+
+        pickerBox.getChildren().addAll(picker, goToDate);
+        pickerBox.setSpacing(10);
+        pickerBox.setAlignment(Pos.TOP_CENTER);
+        gridBox = new HBox(calendarGrid);
+        gridBox.setAlignment(Pos.BOTTOM_CENTER);
+
+        // Final root VBox setup
+        root.setAlignment(Pos.CENTER);
+        root.getChildren().addAll(pickerBox, dateLbl, headerBox,
                 gridBox);
         root.setSpacing(5);
         root.setPadding(new Insets(15));
