@@ -150,7 +150,7 @@ public class CalendarScene {
     /**
      * The root of all my misery, switching over to a new date once
      * goes well, switching twice however, throws a null pointer
-     * exception which I cannot resolve.
+     * exception which I cannot resolve. I have given up.
      */
     public void setUpDatePicker() {
         goToDate = new Button("Go to date");
@@ -159,9 +159,8 @@ public class CalendarScene {
             try {
                 mainStage.setScene(new CalendarScene().getNewScene(model));
             } catch (NullPointerException e) {
-                e.printStackTrace();
-                ErrorStage exitStage = new ErrorStage();
-
+                ErrorStage.showMessage();
+                System.exit(-1);
             }
         });
     }
