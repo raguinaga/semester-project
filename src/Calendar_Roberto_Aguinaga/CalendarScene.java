@@ -151,7 +151,12 @@ public class CalendarScene {
         goToDate = new Button("Go to date");
         goToDate.setOnMouseClicked(event -> {
             setUpCalModel(picker.getValue());
-            mainStage.setScene(new CalendarScene().getNewScene(model));
+            try {
+                mainStage.setScene(new CalendarScene().getNewScene(model));
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+                System.exit(-1);
+            }
         });
     }
 
@@ -201,6 +206,10 @@ public class CalendarScene {
 
         calendarScene = new Scene(root, 1000, 900);
 
+        // load the stylesheet
+        calendarScene.getStylesheets().add(this.getClass().getResource(
+                "./styleRules.css").toExternalForm());
+
         return calendarScene;
     }
 
@@ -236,6 +245,10 @@ public class CalendarScene {
         root.setPadding(new Insets(15));
 
         calendarScene = new Scene(root, 1000, 900);
+
+        // load the style sheet
+        calendarScene.getStylesheets().add(this.getClass().getResource(
+                "./styleRules.css").toExternalForm());
 
         return calendarScene;
     }
