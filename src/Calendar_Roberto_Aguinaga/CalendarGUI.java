@@ -14,10 +14,6 @@ public class CalendarGUI extends Application {
         Scene defaultScene =
                 new CalendarScene().getDefaultScene(window);
 
-        // Load the stylesheet
-        defaultScene.getStylesheets().add(this.getClass().getResource(
-                "./styleRules.css").toExternalForm());
-
         // Set the scene and show the stage.
         window.setScene(defaultScene);
         window.setTitle("Calendar");
