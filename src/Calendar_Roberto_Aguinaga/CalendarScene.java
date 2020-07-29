@@ -154,8 +154,10 @@ public class CalendarScene {
             try {
                 mainStage.setScene(new CalendarScene().getNewScene(model));
             } catch (NullPointerException e) {
-                e.printStackTrace();
-                System.exit(-1);
+                mainStage.setScene(new CalendarScene()
+                        .getDefaultScene(mainStage));
+                /*e.printStackTrace();
+                System.exit(-1);*/
             }
         });
     }
