@@ -27,7 +27,6 @@ public class CalendarScene {
     // Javafx Fields for this scene.
     private Stage mainStage; // reference to main stage from CalGUI
     private CalendarModel model; // Calendar model
-    private CalendarModel newModel;
     private Scene calendarScene; // the main scene with a calendar.
     private VBox root = new VBox(); // root container for the whole
     // scene
