@@ -19,12 +19,13 @@ import java.time.LocalDate;
 
 
 public class CalendarScene {
+
     private final int WEEKDAYS = 7; // days in a week
     private final int WEEKROWS = 6; // I honestly just based this off
     // the windows taskbar calendar
 
     // Javafx Fields for this scene.
-    private Stage mainStage; // reference to main stage in calendar GUI
+    private Stage mainStage; // reference to main stage from CalGUI
     private CalendarModel model; // Calendar model
     private CalendarModel newModel;
     private Scene calendarScene; // the main scene with a calendar.
@@ -133,7 +134,7 @@ public class CalendarScene {
         // numbers for the days
         int gridCount = 1;
         int lblCount = 1;
-        int offset = model.firstDay;
+        int offset = model.getFirstDay();
 
         for (Node node : calendarGrid.getChildren()) {
             VBox dayCell = (VBox) node; // have to cast nodes
@@ -146,7 +147,7 @@ public class CalendarScene {
             } else {
                 // if the number of nodes exceeds the days in the
                 // month, darken the days, do not add labels
-                if (lblCount > model.daysInMonth) {
+                if (lblCount > model.getDaysInMonth()) {
                     node.setStyle("-fx-background-color: #737373");
                 } else {
                     Label numberLbl = new Label(Integer.toString(lblCount));
@@ -195,25 +196,20 @@ public class CalendarScene {
      * has whatever the System date is as its date.
      *
      * @param mainStage
-     * @return
+     * @return A scene with the appropriate calendar grid
      */
     public Scene getDefaultScene(Stage mainStage) {
-        // Get reference to main stage, to add to dayCell event handler.
-        this.mainStage = mainStage;
-
-        // Create a new Calendar Model based on the default date
-        model = new CalendarModel();
 
         // Set up a label and HBox for displaying the Date above
         // the calendar
-        nameLbl = new Label(model.monthName);
+        nameLbl = new Label(model.getMonthName());
         HBox nameBox = new HBox(nameLbl);
         nameBox.setAlignment(Pos.CENTER);
         nameBox.setMaxWidth(600);
         nameBox.setMinHeight(70);
         nameBox.getStyleClass().add("name-label");
 
-        // Set up the Calendar grid and date picker.
+        // Set up the Week header, calendar grid, and date picker.
         createWeekHeader();
         createCalendar();
         setDayLabels();
@@ -257,7 +253,7 @@ public class CalendarScene {
         model = cm;
 
         // Same Header Box/ date label stuff as above
-        nameLbl = new Label(model.monthName);
+        nameLbl = new Label(model.getMonthName());
         HBox dateLbl = new HBox(nameLbl);
         dateLbl.setAlignment(Pos.CENTER);
         dateLbl.setMaxWidth(600);
@@ -290,5 +286,17 @@ public class CalendarScene {
                 "./styleRules.css").toExternalForm());
 
         return calendarScene;
+    }
+
+    /**
+     * Default constructor gets a new CalendarModel
+     */
+    public CalendarScene(Stage stage) {
+        mainStage = stage;
+        model = new CalendarModel();
+    }
+
+    public CalendarScene(CalendarScene cs) {
+
     }
 }
