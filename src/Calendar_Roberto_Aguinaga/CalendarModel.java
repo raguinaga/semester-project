@@ -20,13 +20,13 @@ public class CalendarModel {
      * generate the right starting date for the calendar given the year
      * and month.
      */
-    protected String dateString;
-    protected String monthName;
-    protected int year;
-    protected int month;
-    protected int firstDay;
-    protected int daysInMonth;
-    protected GregorianCalendar calendar;
+    private String dateString;
+    private String monthName;
+    private int year;
+    private int month;
+    private int firstDay;
+    private int daysInMonth;
+    private GregorianCalendar calendar;
 
     /**
      * This constructor does four main things: Creates a GregorianCalendar
@@ -112,6 +112,7 @@ public class CalendarModel {
      * @param date A LocalDate object.
      */
     public CalendarModel(LocalDate date) {
+        // Extract the values from the Local date passed in
         int year, month, day;
         year = date.getYear();
         month = date.getMonthValue();
@@ -171,13 +172,39 @@ public class CalendarModel {
                 calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         // Get the year of the calendar
-        year = calendar.get(Calendar.YEAR);
+        this.year = year;
         // Get the month of the calendar
-        month = calendar.get(Calendar.MONTH);
+        this.month = month;
         // Make a nice string representation of the calendar date.
         dateString = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
+    // Getters
+    public String getDateString() {
+        return dateString;
+    }
 
+    public String getMonthName() {
+        return monthName;
+    }
 
+    public int getYear() {
+        return year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getFirstDay() {
+        return firstDay;
+    }
+
+    public int getDaysInMonth() {
+        return daysInMonth;
+    }
+
+    public GregorianCalendar getCalendar() {
+        return calendar;
+    }
 }
 
