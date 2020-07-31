@@ -6,6 +6,7 @@ package Calendar_Roberto_Aguinaga;
 
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -17,12 +18,11 @@ import java.util.ArrayList;
 
 
 public class NoteScene implements ReturnContent {
-    private Stage mainStage; // ref to main stage, maybe this is
-    // causing my null pointer problems?
+    private final SplitPane root = new SplitPane();
     private Scene calendarScene; // Ref to previous calendar scene
     private CalendarModel model; // calendar model, again may be
     // cause of null pointer problems
-    private VBox writeBox = new VBox(); // VBox to house TextArea,
+    private final VBox writeBox = new VBox(); // VBox to house TextArea,
     // and button HBox
     private ListView<CheckBox> noteList; // ListView for checkboxes
     private NoteHandler noteHandler; // IO file-handler object
@@ -151,5 +151,10 @@ public class NoteScene implements ReturnContent {
                 "./styleRules.css").toExternalForm());
 
         return noteScene;
+    }
+
+    @Override
+    public Parent getContent() {
+        return root;
     }
 }
