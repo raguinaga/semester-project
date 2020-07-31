@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 
-public class NoteScene {
+public class NoteScene implements ReturnContent {
     private Stage mainStage; // ref to main stage, maybe this is
     // causing my null pointer problems?
     private Scene calendarScene; // Ref to previous calendar scene
