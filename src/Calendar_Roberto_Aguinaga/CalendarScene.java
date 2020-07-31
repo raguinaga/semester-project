@@ -19,22 +19,19 @@ import javafx.stage.Stage;
 
 public class CalendarScene implements ReturnContent {
 
-    // Javafx Fields for this scene.
-    private CalendarModel model; // Calendar model
     private final VBox root = new VBox(); // root container for the whole
-    // scene
-
     // Date picker control so users can move to other dates.
     private final DatePicker datePicker = new DatePicker();
-    private Button goToDate;
+    // scene
     // Box for the above two controls
     private final HBox pickerBox = new HBox();
-
+    private final GridPane calendarGrid = new GridPane();
+    // Javafx Fields for this scene.
+    private CalendarModel model; // Calendar model
+    private Button goToDate;
     // HBoxes for the calendar controls.
     private HBox gridBox; // for the calendar grid
     private HBox headerBox; // for the day labels
-    private final GridPane calendarGrid = new GridPane();
-
     // Label telling user what month / year they are in.
     private Label nameLbl;
 
@@ -112,14 +109,6 @@ public class CalendarScene implements ReturnContent {
                 VBox dayCell = new VBox();
                 dayCell.getStyleClass().add("day-cell");
 
-
-                dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                        event -> {
-                            NoteScene noteScene = new NoteScene();
-                            dayCell.getScene().setRoot(noteScene.getContent());
-                        });
-
-
                 // Add VBoxes to the GridPane
                 calendarGrid.add(dayCell, cols, rows);
             }
@@ -138,6 +127,7 @@ public class CalendarScene implements ReturnContent {
         // Set style class for the grid
         calendarGrid.getStyleClass().add("cal-grid");
     }
+
 
     public void setDayLabels() {
         // Go back through each node in the gridpane and add the
@@ -163,9 +153,12 @@ public class CalendarScene implements ReturnContent {
                     Label numberLbl = new Label(Integer.toString(lblCount));
                     dayCell.getChildren().add(numberLbl);
 
-                    // Add a "number" ID property to each cell for use
-                    // in getting the right note file.
-                    dayCell.setId(Integer.toString(lblCount));
+                    // Add an event handler to each cell
+                    dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                            event -> {
+                                NoteScene noteScene = new NoteScene();
+                                dayCell.getScene().setRoot(noteScene.getContent());
+                            });
                 }
                 lblCount++;
             } // end of else-if chain
@@ -213,7 +206,7 @@ public class CalendarScene implements ReturnContent {
         root.setSpacing(5);
         root.setPadding(new Insets(15));
 
-        root.setMaxSize(1000,900);
+        root.setMaxSize(1000, 900);
 
         // load the stylesheet
         root.getStylesheets().add(this.getClass().getResource(
