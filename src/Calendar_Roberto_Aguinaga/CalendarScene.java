@@ -119,6 +119,7 @@ public class CalendarScene implements ReturnContent {
                             dayCell.getScene().setRoot(noteScene.getContent());
                         });
 
+
                 // Add VBoxes to the GridPane
                 calendarGrid.add(dayCell, cols, rows);
             }
@@ -148,7 +149,7 @@ public class CalendarScene implements ReturnContent {
         for (Node node : calendarGrid.getChildren()) {
             VBox dayCell = (VBox) node; // have to cast nodes
 
-            // If the month does not start on sundy, make it dark, do
+            // If the month does not start on Sunday, make it dark, do
             // not add number label
             if (gridCount <= offset) {
                 gridCount++;
@@ -161,10 +162,14 @@ public class CalendarScene implements ReturnContent {
                 } else {
                     Label numberLbl = new Label(Integer.toString(lblCount));
                     dayCell.getChildren().add(numberLbl);
+
+                    // Add a "number" ID property to each cell for use
+                    // in getting the right note file.
+                    dayCell.setId(Integer.toString(lblCount));
                 }
                 lblCount++;
-            }
-        }
+            } // end of else-if chain
+        } // end of for-each loop
     }
 
     public void setUpDatePicker() {
