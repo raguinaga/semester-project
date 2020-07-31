@@ -12,12 +12,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 
 public class NoteScene implements ReturnContent {
+    private final int dayNumber;
     private final SplitPane root = new SplitPane();
     private Scene calendarScene; // Ref to previous calendar scene
     private CalendarModel model; // calendar model, again may be
@@ -27,6 +27,14 @@ public class NoteScene implements ReturnContent {
     private ListView<CheckBox> noteList; // ListView for checkboxes
     private NoteHandler noteHandler; // IO file-handler object
 
+    public NoteScene(Label label, CalendarModel model) {
+        this.model = model;
+        dayNumber = Integer.parseInt(label.getText());
+        setUpWriteBox();
+        setUpDisplayBox();
+        updateNoteList();
+
+    }
     /**
      * Sets up the left VBox, text area, buttons and button HBox
      */
@@ -51,7 +59,8 @@ public class NoteScene implements ReturnContent {
 
         // Set up event handlers for buttons
         returnButton.setOnAction(event -> {
-            mainStage.setScene(calendarScene);
+            returnButton.getScene()
+                    .setRoot(new CalendarScene(model).getContent());
         });
         saveNote.setOnAction(event -> {
             noteHandler.writeNote(writeArea.getText());
