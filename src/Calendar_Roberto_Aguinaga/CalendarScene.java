@@ -39,8 +39,17 @@ public class CalendarScene implements ReturnContent {
     // Label telling user what month / year they are in.
     private Label nameLbl;
 
+    /**
+     * Default constructor sets up a new Calendar Model based on
+     * LocalDate's now method. Then calls the rest of the methods in
+     * the class to set up the Calander controls
+     */
     public CalendarScene() {
         model = new CalendarModel();
+        setUpDatePicker();
+        createWeekHeader();
+        createCalendar();
+        setDayLabels();
 
     }
 
@@ -152,16 +161,12 @@ public class CalendarScene implements ReturnContent {
         }
     }
 
-    /**
-     * The root of all my misery, switching over to a new date once
-     * goes well, switching twice however throws a null pointer
-     * exception which I cannot resolve. I have given up.
-     */
     public void setUpDatePicker() {
         goToDate = new Button("Go to date");
         goToDate.setOnMouseClicked(event -> {
             model = new CalendarModel(datePicker.getValue());
-
+            NoteScene noteScene = new NoteScene();
+            noteScene.getScene().setRoot(NoteScene.getContent);
         });
     }
 
