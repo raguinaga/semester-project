@@ -49,8 +49,19 @@ public class CalendarScene implements ReturnContent {
         createWeekHeader();
         createCalendar();
         setDayLabels();
+        setUpRoot();
 
     }
+
+    public CalendarScene(CalendarModel cm) {
+        model = cm;
+        setUpDatePicker();
+        createWeekHeader();
+        createCalendar();
+        setDayLabels();
+        setUpRoot();
+    }
+
 
     /**
      * This method generates the weekday header.
@@ -91,12 +102,10 @@ public class CalendarScene implements ReturnContent {
      */
     private void createCalendar() {
         // Loop through the 6 rows, and add vboxes 7 times to each row
-        // I honestly just based this off
-        int WEEKROWS = 6;
-        // days in a week
-        int WEEKDAYS = 7;
-        for (int rows = 0; rows < WEEKROWS; rows++) {
-            for (int cols = 0; cols < WEEKDAYS; cols++) {
+        int weeks = 6;
+        int days = 7;
+        for (int rows = 0; rows < weeks; rows++) {
+            for (int cols = 0; cols < days; cols++) {
 
                 // Create VBoxes for day cells, add styleClass to
                 // each one
@@ -106,10 +115,8 @@ public class CalendarScene implements ReturnContent {
 
                 dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
                         event -> {
-                            try {
-                            } catch (NullPointerException e) {
-                                System.exit(-1);
-                            }
+                            NoteScene noteScene = new NoteScene();
+                            dayCell.getScene().setRoot(noteScene.getContent());
                         });
 
                 // Add VBoxes to the GridPane
@@ -120,7 +127,7 @@ public class CalendarScene implements ReturnContent {
         // Have to also add row and column constraints for consistent
         // VBox size, this adds an extra row that I couldn't figure
         // out how to avoid.
-        for (int i = 0; i < WEEKDAYS; i++) {
+        for (int i = 0; i < days; i++) {
             RowConstraints rc = new RowConstraints(90);
             calendarGrid.getRowConstraints().add(rc);
             ColumnConstraints cc =
@@ -164,17 +171,17 @@ public class CalendarScene implements ReturnContent {
         goToDate = new Button("Go to date");
         goToDate.setOnMouseClicked(event -> {
             model = new CalendarModel(datePicker.getValue());
-            NoteScene noteScene = new NoteScene();
-            goToDate.getScene().setRoot(noteScene.getContent());
+            CalendarScene calScene = new CalendarScene(model);
+            goToDate.getScene().setRoot(calScene.getContent());
         });
     }
 
 
     /**
-     * 
+     *
      * @return
      */
-    private VBox getDefaultScene() {
+    private void setUpRoot() {
 
         // Set up a label and HBox for displaying the Date above
         // the calendar
@@ -205,7 +212,6 @@ public class CalendarScene implements ReturnContent {
         root.getStylesheets().add(this.getClass().getResource(
                 "./styleRules.css").toExternalForm());
 
-        return root;
     }
 
     @Override
