@@ -26,15 +26,15 @@ public class CalendarScene implements ReturnContent {
     // scene
 
     // Date picker control so users can move to other dates.
-    private DatePicker picker = new DatePicker();
+    private final DatePicker datePicker = new DatePicker();
     private Button goToDate;
-    private HBox pickerBox = new HBox(); // Box for the above two
+    private final HBox pickerBox = new HBox(); // Box for the above two
     // controls
 
     // HBoxes for the calendar controls.
     private HBox gridBox; // for the calendar grid
     private HBox headerBox; // for the day labels
-    private GridPane calendarGrid = new GridPane();
+    private final GridPane calendarGrid = new GridPane();
 
     // Label telling user what month / year they are in.
     private Label nameLbl;
@@ -160,7 +160,7 @@ public class CalendarScene implements ReturnContent {
     public void setUpDatePicker() {
         goToDate = new Button("Go to date");
         goToDate.setOnMouseClicked(event -> {
-            model = new CalendarModel(picker.getValue());
+            model = new CalendarModel(datePicker.getValue());
 
         });
     }
@@ -191,7 +191,7 @@ public class CalendarScene implements ReturnContent {
         setUpDatePicker();
 
         // Set up the HBox for the date picker and button
-        pickerBox.getChildren().addAll(picker, goToDate);
+        pickerBox.getChildren().addAll(datePicker, goToDate);
         pickerBox.setSpacing(10);
         pickerBox.setAlignment(Pos.TOP_CENTER);
         gridBox = new HBox(calendarGrid);
@@ -241,7 +241,7 @@ public class CalendarScene implements ReturnContent {
         setDayLabels();
         setUpDatePicker();
 
-        pickerBox.getChildren().addAll(picker, goToDate);
+        pickerBox.getChildren().addAll(datePicker, goToDate);
         pickerBox.setSpacing(10);
         pickerBox.setAlignment(Pos.TOP_CENTER);
         gridBox = new HBox(calendarGrid);
