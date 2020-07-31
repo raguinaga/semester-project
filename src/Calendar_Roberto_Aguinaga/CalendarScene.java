@@ -76,10 +76,10 @@ public class CalendarScene implements ReturnContent {
         headerBox.setMaxWidth(847); // try to match the gridpane width
 
         // Set up internal Hboxes and labels.
-        for (int i = 0; i < days.length; i++) {
+        for (String day : days) {
             // Create HBoxes / labels, these HBoxes will contain the
             // labels that have the day names.
-            Label lbl = new Label(days[i]);
+            Label lbl = new Label(day);
             HBox lblBox = new HBox(lbl);
 
             // Make sure the HBoxes fill up the header box HBox
@@ -179,12 +179,17 @@ public class CalendarScene implements ReturnContent {
             CalendarScene calScene = new CalendarScene(model);
             goToDate.getScene().setRoot(calScene.getContent());
         });
+
+        // Sets up the HBox container for the controls
+        pickerBox.getChildren().addAll(datePicker, goToDate);
+        pickerBox.setSpacing(10);
+        pickerBox.setAlignment(Pos.TOP_CENTER);
     }
 
 
     /**
-     *
-     * @return
+     * Takes all the other layout containers and places them in the
+     * root VBox. Also sets up the datePicker
      */
     private void setUpRoot() {
 
@@ -197,10 +202,7 @@ public class CalendarScene implements ReturnContent {
         nameBox.setMinHeight(70);
         nameBox.getStyleClass().add("name-label");
 
-        // Set up the HBox for the date picker and button
-        pickerBox.getChildren().addAll(datePicker, goToDate);
-        pickerBox.setSpacing(10);
-        pickerBox.setAlignment(Pos.TOP_CENTER);
+        // Sets up the CalendarGrid HBox
         gridBox = new HBox(calendarGrid);
         gridBox.setAlignment(Pos.BOTTOM_CENTER);
 
