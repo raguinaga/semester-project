@@ -124,7 +124,7 @@ public class NoteScene implements ReturnContent {
      *                      note handler class
      * @return A Scene with a split Pane, for writing and reading notes
      */
-    public Scene getScene(Stage mainStage, Scene calendarScene,
+    /*Public Scene getScene(Stage mainStage, Scene calendarScene,
                           CalendarModel model) {
         // Get ref to main stage, store it.
         this.mainStage = mainStage;
@@ -152,7 +152,7 @@ public class NoteScene implements ReturnContent {
 
         return noteScene;
     }
-
+*/
     @Override
     public Parent getContent() {
         return root;
