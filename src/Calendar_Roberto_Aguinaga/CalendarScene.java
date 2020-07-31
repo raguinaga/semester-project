@@ -171,13 +171,10 @@ public class CalendarScene implements ReturnContent {
 
 
     /**
-     * Sets up the calendar scene with a CalendarModel reference that
-     * has whatever the System date is as its date.
-     *
-     * @param mainStage
-     * @return A scene with the appropriate calendar grid
+     * 
+     * @return
      */
-    public Scene getDefaultScene(Stage mainStage) {
+    private VBox getDefaultScene() {
 
         // Set up a label and HBox for displaying the Date above
         // the calendar
@@ -187,12 +184,6 @@ public class CalendarScene implements ReturnContent {
         nameBox.setMaxWidth(600);
         nameBox.setMinHeight(70);
         nameBox.getStyleClass().add("name-label");
-
-        // Set up the Week header, calendar grid, and date picker.
-        createWeekHeader();
-        createCalendar();
-        setDayLabels();
-        setUpDatePicker();
 
         // Set up the HBox for the date picker and button
         pickerBox.getChildren().addAll(datePicker, goToDate);
@@ -208,63 +199,13 @@ public class CalendarScene implements ReturnContent {
         root.setSpacing(5);
         root.setPadding(new Insets(15));
 
-        calendarScene = new Scene(root, 1000, 900);
+        root.setMaxSize(1000,900);
 
         // load the stylesheet
-        calendarScene.getStylesheets().add(this.getClass().getResource(
+        root.getStylesheets().add(this.getClass().getResource(
                 "./styleRules.css").toExternalForm());
 
-        return calendarScene;
-    }
-
-    /**
-     * I could not get an if-else statement above to correctly assign
-     * the CalendarModel reference so this method does literally the
-     * same thing as getDefaultScene except it assigns the
-     * CalendarModel reference to the argument supplied by the caller
-     * of this function
-     *
-     * @param cm A CalendarModel object
-     * @return A Scene.
-     */
-    public Scene getNewScene(CalendarModel cm) {
-        // Make the model reference a new Cal Model
-        model = cm;
-
-        // Same Header Box/ date label stuff as above
-        nameLbl = new Label(model.getMonthName());
-        HBox dateLbl = new HBox(nameLbl);
-        dateLbl.setAlignment(Pos.CENTER);
-        dateLbl.setMaxWidth(600);
-        dateLbl.setMinHeight(70);
-        dateLbl.getStyleClass().add("name-label");
-
-        // Set up the Calendar grid and date picker.
-        createWeekHeader();
-        createCalendar();
-        setDayLabels();
-        setUpDatePicker();
-
-        pickerBox.getChildren().addAll(datePicker, goToDate);
-        pickerBox.setSpacing(10);
-        pickerBox.setAlignment(Pos.TOP_CENTER);
-        gridBox = new HBox(calendarGrid);
-        gridBox.setAlignment(Pos.BOTTOM_CENTER);
-
-        // Final root VBox setup
-        root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(pickerBox, dateLbl, headerBox,
-                gridBox);
-        root.setSpacing(5);
-        root.setPadding(new Insets(15));
-
-        calendarScene = new Scene(root, 1000, 900);
-
-        // load the style sheet
-        calendarScene.getStylesheets().add(this.getClass().getResource(
-                "./styleRules.css").toExternalForm());
-
-        return calendarScene;
+        return root;
     }
 
     @Override
