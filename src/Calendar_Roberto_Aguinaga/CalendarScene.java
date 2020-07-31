@@ -7,6 +7,7 @@ package Calendar_Roberto_Aguinaga;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -15,20 +16,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
 
-
-public class CalendarScene {
-
-    private final int WEEKDAYS = 7; // days in a week
-    private final int WEEKROWS = 6; // I honestly just based this off
-    // the windows taskbar calendar
+public class CalendarScene implements ReturnContent {
 
     // Javafx Fields for this scene.
-    private Stage mainStage; // reference to main stage from CalGUI
     private CalendarModel model; // Calendar model
     private Scene calendarScene; // the main scene with a calendar.
-    private VBox root = new VBox(); // root container for the whole
+    private final VBox root = new VBox(); // root container for the whole
     // scene
 
     // Date picker control so users can move to other dates.
@@ -44,6 +38,11 @@ public class CalendarScene {
 
     // Label telling user what month / year they are in.
     private Label nameLbl;
+
+    public CalendarScene() {
+        model = new CalendarModel();
+
+    }
 
     /**
      * This method generates the weekday header.
@@ -84,6 +83,10 @@ public class CalendarScene {
      */
     private void createCalendar() {
         // Loop through the 6 rows, and add vboxes 7 times to each row
+        // I honestly just based this off
+        int WEEKROWS = 6;
+        // days in a week
+        int WEEKDAYS = 7;
         for (int rows = 0; rows < WEEKROWS; rows++) {
             for (int cols = 0; cols < WEEKDAYS; cols++) {
 
@@ -92,18 +95,10 @@ public class CalendarScene {
                 VBox dayCell = new VBox();
                 dayCell.getStyleClass().add("day-cell");
 
-                // on each cell, add an event handler to switch scenes.
-                // This also throws a null pointer exception when
-                // the model is not the default model for some
-                // reason??? Also set up a catch clause to just shut
-                // the program down somewhat gracefully, though I
-                // wish I could have included a pop message or
-                // something.
+
                 dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
                         event -> {
                             try {
-                                mainStage.setScene(new NoteScene().getScene(mainStage,
-                                        this.calendarScene, model));
                             } catch (NullPointerException e) {
                                 System.exit(-1);
                             }
@@ -165,30 +160,11 @@ public class CalendarScene {
     public void setUpDatePicker() {
         goToDate = new Button("Go to date");
         goToDate.setOnMouseClicked(event -> {
-            setUpCalModel(picker.getValue());
-            try {
-                mainStage.setScene(new CalendarScene().getNewScene(model));
-            } catch (NullPointerException e) {
-                System.exit(-1);
-            }
+            model = new CalendarModel(picker.getValue());
+
         });
     }
 
-    /**
-     * Set up a new Calendar from the current system date
-     */
-    public void setUpCalModel() {
-        model = new CalendarModel();
-    }
-
-    /**
-     * Sets up a new calendar model from a LocalDate object
-     *
-     * @param date A LocalDate object
-     */
-    public void setUpCalModel(LocalDate date) {
-        model = new CalendarModel(date);
-    }
 
     /**
      * Sets up the calendar scene with a CalendarModel reference that
@@ -287,15 +263,8 @@ public class CalendarScene {
         return calendarScene;
     }
 
-    /**
-     * Default constructor gets a new CalendarModel
-     */
-    public CalendarScene(Stage stage) {
-        mainStage = stage;
-        model = new CalendarModel();
-    }
-
-    public CalendarScene(CalendarScene cs) {
-
+    @Override
+    public Parent getContent() {
+        return root;
     }
 }
