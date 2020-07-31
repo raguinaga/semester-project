@@ -50,6 +50,11 @@ public class CalendarScene implements ReturnContent {
 
     }
 
+    /**
+     * Second Constructor sets up a Calendar based on
+     *
+     * @param cm
+     */
     public CalendarScene(CalendarModel cm) {
         model = cm;
         setUpDatePicker();
@@ -126,6 +131,10 @@ public class CalendarScene implements ReturnContent {
         }
         // Set style class for the grid
         calendarGrid.getStyleClass().add("cal-grid");
+
+        // Sets up the CalendarGrid HBox
+        gridBox = new HBox(calendarGrid);
+        gridBox.setAlignment(Pos.BOTTOM_CENTER);
     }
 
 
@@ -153,11 +162,14 @@ public class CalendarScene implements ReturnContent {
                     Label numberLbl = new Label(Integer.toString(lblCount));
                     dayCell.getChildren().add(numberLbl);
 
-                    // Add an event handler to each cell
+                    // Add an event handler to each cell, pass the
+                    // current day in the form of the label to notescene
                     dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
                             event -> {
-                                NoteScene noteScene = new NoteScene();
-                                dayCell.getScene().setRoot(noteScene.getContent());
+                                NoteScene noteScene =
+                                        new NoteScene(numberLbl, model);
+                                dayCell.getScene()
+                                        .setRoot(noteScene.getContent());
                             });
                 }
                 lblCount++;
@@ -165,7 +177,7 @@ public class CalendarScene implements ReturnContent {
         } // end of for-each loop
     }
 
-    public void setUpDatePicker() {
+    private void setUpDatePicker() {
         goToDate = new Button("Go to date");
         goToDate.setOnMouseClicked(event -> {
             model = new CalendarModel(datePicker.getValue());
@@ -194,10 +206,6 @@ public class CalendarScene implements ReturnContent {
         nameBox.setMaxWidth(600);
         nameBox.setMinHeight(70);
         nameBox.getStyleClass().add("name-label");
-
-        // Sets up the CalendarGrid HBox
-        gridBox = new HBox(calendarGrid);
-        gridBox.setAlignment(Pos.BOTTOM_CENTER);
 
         // Final root VBox setup
         root.setAlignment(Pos.CENTER);
