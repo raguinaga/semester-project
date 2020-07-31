@@ -19,7 +19,7 @@ public class CalendarGUI extends Application {
 
         // Get the starting scene
         Scene defaultScene =
-                new CalendarScene(window).getDefaultScene(window);
+                new Scene(new CalendarScene().getContent());
 
         // Set the scene and show the stage.
         window.setScene(defaultScene);
