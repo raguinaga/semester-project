@@ -21,7 +21,6 @@ public class CalendarScene implements ReturnContent {
 
     // Javafx Fields for this scene.
     private CalendarModel model; // Calendar model
-    private Scene calendarScene; // the main scene with a calendar.
     private final VBox root = new VBox(); // root container for the whole
     // scene
 
@@ -166,7 +165,7 @@ public class CalendarScene implements ReturnContent {
         goToDate.setOnMouseClicked(event -> {
             model = new CalendarModel(datePicker.getValue());
             NoteScene noteScene = new NoteScene();
-            noteScene.getScene().setRoot(NoteScene.getContent);
+            goToDate.getScene().setRoot(noteScene.getContent());
         });
     }
 
