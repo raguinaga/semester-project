@@ -28,8 +28,8 @@ public class CalendarScene implements ReturnContent {
     // Date picker control so users can move to other dates.
     private final DatePicker datePicker = new DatePicker();
     private Button goToDate;
-    private final HBox pickerBox = new HBox(); // Box for the above two
-    // controls
+    // Box for the above two controls
+    private final HBox pickerBox = new HBox();
 
     // HBoxes for the calendar controls.
     private HBox gridBox; // for the calendar grid
