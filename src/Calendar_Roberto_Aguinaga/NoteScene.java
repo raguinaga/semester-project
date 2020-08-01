@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class NoteScene implements ReturnContent {
     private final int dayNumber;
     private final SplitPane root = new SplitPane();
-    private Scene calendarScene; // Ref to previous calendar scene
     private CalendarModel model; // calendar model, again may be
     // cause of null pointer problems
     private final VBox writeBox = new VBox(); // VBox to house TextArea,
@@ -97,9 +96,8 @@ public class NoteScene implements ReturnContent {
     }
 
     /**
-     * This method basically does the same thing as refresh, but
-     * doesn't duplicate the notes on the list view. This feels
-     * clunky to use but it was fast to put together.
+     * This method basically does the same thing as ListView's refresh,
+     * but doesn't duplicate the notes on the list view. 
      */
     public void updateNoteList() {
         ArrayList<String> notes = noteHandler.readNotes();
