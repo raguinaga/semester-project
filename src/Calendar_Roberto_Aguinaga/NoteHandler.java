@@ -9,15 +9,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NoteHandler {
+    private final String DATESTRING;
     // A calendar model
-    private final CalendarModel model;
+    private final CalendarModel MODEL;
+    // File
+    private File file;
 
     /**
      * Constructor takes model and stores the reference.
      * @param model A CalendarModel
      */
-    public NoteHandler(CalendarModel model) {
-        this.model = model;
+    public NoteHandler(CalendarModel model, int day) {
+        this.MODEL = model;
+        DATESTRING = model.getDateString(day);
+        file = new File(DATESTRING + ".txt");
     }
 
     /**
@@ -27,7 +32,6 @@ public class NoteHandler {
      * @return A boolean, true if the file exists, false if it does not.
      */
     public boolean checkIfNoteExists() {
-        File file = new File(model.dateString + ".txt");
         if (file.exists()) {
             return true;
         } else {
@@ -44,8 +48,6 @@ public class NoteHandler {
      */
     public void writeNote( String notes) {
         // Make the file name based on the
-        String filename = model.dateString + ".txt";
-        File file = new File(filename);
         // Check if the file exists, if it does not, create a new
         // file. If the file does exist, open it in append mode. Used
         // try-with-resources blocks for auto resource management.
@@ -58,7 +60,7 @@ public class NoteHandler {
             } // End of try-catch clause
         } else {
             // Open file in append mode
-            try (FileWriter fWriter = new FileWriter(filename, true);
+            try (FileWriter fWriter = new FileWriter(file, true);
                  PrintWriter pWriter = new PrintWriter(fWriter)) {
                 pWriter.println(notes);
             } catch (IOException e) {
@@ -82,26 +84,15 @@ public class NoteHandler {
             // Make file object, check if it exist, if it does, start
             // scanning through it with a while loop + Scanner,
             // adding lines to the ArrayList
-            File file = new File(model.dateString + ".txt");
             if (file.exists()) {
                 Scanner noteScanner = new Scanner(file);
                 while (noteScanner.hasNextLine()) {
                     notes.add(noteScanner.nextLine());
                 }
                 noteScanner.close();
-            } else {
-                // If the file does not exist just return an String
-                // with a message. A rather clumsy way to deliver a
-                // message but better than throwing a new
-                // FileNotFoundException.
-                notes.add("File not found");
             }
-        } catch (NullPointerException e) {
-            System.out.println(e.getCause());
-        } catch (FileNotFoundException fe) {
-            // I had to include this catch block or the Scanner would
-            // not be constructed
-            System.out.println(fe.getCause());
+        } catch (NullPointerException | FileNotFoundException e) {
+            System.err.println(e.getCause());
         }
         return notes;
     }
