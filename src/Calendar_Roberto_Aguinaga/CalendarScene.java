@@ -180,9 +180,12 @@ public class CalendarScene implements ReturnContent {
     private void setUpDatePicker() {
         goToDate = new Button("Go to date");
         goToDate.setOnMouseClicked(event -> {
-            calendarModel = new CalendarModel(datePicker.getValue());
-            CalendarScene calScene = new CalendarScene(calendarModel);
-            goToDate.getScene().setRoot(calScene.getContent());
+            try {
+                calendarModel = new CalendarModel(datePicker.getValue());
+                CalendarScene calScene = new CalendarScene(calendarModel);
+                goToDate.getScene().setRoot(calScene.getContent());
+            } catch (NullPointerException ignored) {
+            }
         });
 
         // Sets up the HBox container for the controls
