@@ -16,18 +16,32 @@ import java.util.ArrayList;
 
 
 public class NoteScene implements ReturnContent {
-    private final SplitPane root = new SplitPane();
-    private final int dayNumber;
-    private final CalendarModel model;
-    private final VBox writeBox = new VBox(); // VBox to house TextArea,
-    // and button HBox
-    private ListView<CheckBox> noteList; // ListView for checkboxes
-    private final NoteHandler noteHandler; // IO file-handler object
+    // Create root layout node, Calendar model variable
+    private final SplitPane ROOT = new SplitPane();
+    private final CalendarModel MODEL;
 
+    // NoteWriter Class does the actual IO work of reading files
+    private final NoteWriter NOTEWRITER;
+
+    // VBox to house TextArea, ListView for notes
+    private VBox writeBox = new VBox();
+    private ListView<CheckBox> noteList; // ListView for checkboxes
+
+    /**
+     * Constructor takes a model and Label, calls all methods in
+     * class to set up layouts + controls. Uses model and label to
+     * create appropriate string for writing a unique file name to
+     * contain the actual notes.
+     * @param label
+     * @param model
+     */
     public NoteScene(Label label, CalendarModel model) {
-        this.model = model;
-        dayNumber = Integer.parseInt(label.getText());
-        noteHandler = new NoteHandler(model, dayNumber);
+        // +Get our own private class model, even if we don't really
+        // manipulate it.
+        this.MODEL = new CalendarModel(model);
+        int dayNumber = Integer.parseInt(label.getText());
+        String dateString = model.getDateString(dayNumber);
+        NOTEWRITER = new NoteWriter(dateString);
         setUpWriteBox();
         setUpDisplayBox();
         setUpRoot();
@@ -57,10 +71,10 @@ public class NoteScene implements ReturnContent {
         // Set up event handlers for buttons
         returnButton.setOnAction(event -> {
             returnButton.getScene()
-                    .setRoot(new CalendarScene(model).getContent());
+                    .setRoot(new CalendarScene(MODEL).getContent());
         });
         saveNote.setOnAction(event -> {
-            noteHandler.writeNote(writeArea.getText());
+            NOTEWRITER.writeNote(writeArea.getText());
             updateNoteList();
         });
         // Add to VBox
@@ -72,7 +86,7 @@ public class NoteScene implements ReturnContent {
      */
     private void setUpDisplayBox() {
         // Get strings that are notes
-        ArrayList<String> notes = noteHandler.readNotes();
+        ArrayList<String> notes = NOTEWRITER.readNotes();
         // Construct the list view
         noteList = new ListView<>();
         // For loop sets up the Check boxes, adds event listeners to
@@ -98,7 +112,7 @@ public class NoteScene implements ReturnContent {
      * but doesn't duplicate the notes on the list view.
      */
     public void updateNoteList() {
-        ArrayList<String> notes = noteHandler.readNotes();
+        ArrayList<String> notes = NOTEWRITER.readNotes();
         // Clear items in list view to avoid duplication.
         noteList.getItems().clear();
         for (String note : notes) {
@@ -121,19 +135,19 @@ public class NoteScene implements ReturnContent {
     public void setUpRoot() {
 
         // Set up split pane
-        root.getItems().addAll(writeBox, noteList);
-        root.setOrientation(Orientation.HORIZONTAL);
+        ROOT.getItems().addAll(writeBox, noteList);
+        ROOT.setOrientation(Orientation.HORIZONTAL);
 
-         root.setMinSize(1000, 900);
+         ROOT.setMinSize(1000, 900);
 
         // Apply style rules to the root
-        root.getStylesheets().add(this.getClass().getResource(
+        ROOT.getStylesheets().add(this.getClass().getResource(
                 "./styleRules.css").toExternalForm());
 
     }
     
     @Override
     public Parent getContent() {
-        return root;
+        return ROOT;
     }
 }
