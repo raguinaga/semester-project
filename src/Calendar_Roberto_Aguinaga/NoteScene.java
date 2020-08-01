@@ -27,7 +27,7 @@ public class NoteScene implements ReturnContent {
     public NoteScene(Label label, CalendarModel model) {
         this.model = model;
         dayNumber = Integer.parseInt(label.getText());
-        noteHandler = new NoteHandler(model);
+        noteHandler = new NoteHandler(model, dayNumber);
         setUpWriteBox();
         setUpDisplayBox();
         setUpRoot();
