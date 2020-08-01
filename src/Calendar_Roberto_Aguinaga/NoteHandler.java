@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class NoteHandler {
     // A calendar model
-    private CalendarModel model;
+    private final CalendarModel model;
 
     /**
      * Constructor takes model and stores the reference.
