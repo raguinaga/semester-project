@@ -16,10 +16,12 @@ public class NoteWriter {
      * Sets up the File object to be manipulated by the NoteScene
      * controls.
      *
-     * @param date
+     * @param date A String that uniquely identifies the date that
+     *             was clicked on.
      */
     public NoteWriter(String date) {
-        // Creates a file object but does not try to open it
+        // Creates a file object but does not try to open it. We name
+        // it after the date that was clicked on.
         FILE = new File(date + ".txt");
     }
 
@@ -57,7 +59,7 @@ public class NoteWriter {
      * model's date.
      *
      * @return An ArrayList of Strings containing notes / tasks /
-     *         whatever is in the file
+     * whatever is in the file
      */
     public ArrayList<String> readNotes() {
         ArrayList<String> noteList = new ArrayList<>();
@@ -77,4 +79,5 @@ public class NoteWriter {
         }
         return noteList;
     }
+
 }
