@@ -8,18 +8,16 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 
 public class CalendarScene implements ReturnContent {
 
-    private final VBox root = new VBox(); // root container for the whole
+    private final VBox ROOT = new VBox(); // root container for the whole
     // Date picker control so users can move to other dates.
     private final DatePicker datePicker = new DatePicker();
     // scene
@@ -32,8 +30,6 @@ public class CalendarScene implements ReturnContent {
     // HBoxes for the calendar controls.
     private HBox gridBox; // for the calendar grid
     private HBox headerBox; // for the day labels
-    // Label telling user what month / year they are in.
-    private Label nameLbl;
 
     /**
      * Default constructor sets up a new Calendar Model based on
@@ -47,16 +43,16 @@ public class CalendarScene implements ReturnContent {
         createCalendar();
         setDayLabels();
         setUpRoot();
-
     }
 
     /**
-     * Second Constructor sets up a Calendar based on
+     * Second Constructor sets up a CalendarModel copied from a
+     * supplied parameter.
      *
      * @param cm
      */
     public CalendarScene(CalendarModel cm) {
-        model = cm;
+        model = new CalendarModel(cm);
         setUpDatePicker();
         createWeekHeader();
         createCalendar();
@@ -200,7 +196,8 @@ public class CalendarScene implements ReturnContent {
 
         // Set up a label and HBox for displaying the Date above
         // the calendar
-        nameLbl = new Label(model.getMonthName());
+        // Label telling user what month / year they are in.
+        Label nameLbl = new Label(model.getMonthName());
         HBox nameBox = new HBox(nameLbl);
         nameBox.setAlignment(Pos.CENTER);
         nameBox.setMaxWidth(600);
@@ -208,22 +205,22 @@ public class CalendarScene implements ReturnContent {
         nameBox.getStyleClass().add("name-label");
 
         // Final root VBox setup
-        root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(pickerBox, nameBox, headerBox,
+        ROOT.setAlignment(Pos.CENTER);
+        ROOT.getChildren().addAll(pickerBox, nameBox, headerBox,
                 gridBox);
-        root.setSpacing(5);
-        root.setPadding(new Insets(15));
+        ROOT.setSpacing(5);
+        ROOT.setPadding(new Insets(15));
 
-        root.setMaxSize(1000, 900);
+        ROOT.setMaxSize(1000, 900);
 
         // load the stylesheet
-        root.getStylesheets().add(this.getClass().getResource(
+        ROOT.getStylesheets().add(this.getClass().getResource(
                 "./styleRules.css").toExternalForm());
 
     }
 
     @Override
     public Parent getContent() {
-        return root;
+        return ROOT;
     }
 }
