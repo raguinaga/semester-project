@@ -8,19 +8,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class NoteHandler {
+public class NoteWriter {
     // Only one file variable to access throughout class.
     private final File FILE;
 
-    /**
-     * Constructor takes model and creates a file name out of the date.
-     * @param model A CalendarModel
-     * @param day An int representing the date we are storing notes for
-     */
-    public NoteHandler(CalendarModel model, int day) {
-        // A calendar model
-        String dateString = model.getDateString(day);
-        FILE = new File(dateString + ".txt");
+
+    public NoteWriter(String date) {
+        // Use the calendar Model to create the string
+        FILE = new File(date + ".txt");
     }
 
     /**
