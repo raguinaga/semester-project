@@ -20,13 +20,12 @@ public class CalendarModel {
      * generate the right starting date for the calendar given the year
      * and month.
      */
-    private String dateString;
     private String monthName;
-    private int year;
-    private int month;
-    private int firstDay;
-    private int daysInMonth;
-    private GregorianCalendar calendar;
+    private final int year;
+    private final int month;
+    private final int firstDay;
+    private final int daysInMonth;
+    private final GregorianCalendar calendar;
 
     /**
      * This constructor does four main things: Creates a GregorianCalendar
@@ -101,8 +100,6 @@ public class CalendarModel {
         year = calendar.get(Calendar.YEAR);
         // Get the month of the calendar
         month = calendar.get(Calendar.MONTH);
-        // Make a nice string representation of the calendar date.
-        dateString = defaultDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     /**
@@ -176,11 +173,18 @@ public class CalendarModel {
         // Get the month of the calendar
         this.month = month;
         // Make a nice string representation of the calendar date.
-        dateString = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
     // Getters
-    public String getDateString() {
-        return dateString;
+
+    /**
+     * This method returns the date of the calendar as a string. For
+     * use in the NoteHandler class to name files.
+     *
+     * @param day
+     * @return
+     */
+    public String getDateString(int day) {
+        return String.format("%d-%d-%d", year, month, day);
     }
 
     public String getMonthName() {
