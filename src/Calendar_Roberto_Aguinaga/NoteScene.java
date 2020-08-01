@@ -4,35 +4,33 @@
 
 package Calendar_Roberto_Aguinaga;
 
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.geometry.Orientation;
 
 import java.util.ArrayList;
 
 
 public class NoteScene implements ReturnContent {
-    private final int dayNumber;
     private final SplitPane root = new SplitPane();
-    private CalendarModel model; // calendar model, again may be
-    // cause of null pointer problems
+    private final int dayNumber;
+    private final CalendarModel model;
     private final VBox writeBox = new VBox(); // VBox to house TextArea,
     // and button HBox
     private ListView<CheckBox> noteList; // ListView for checkboxes
-    private NoteHandler noteHandler; // IO file-handler object
+    private final NoteHandler noteHandler; // IO file-handler object
 
     public NoteScene(Label label, CalendarModel model) {
         this.model = model;
         dayNumber = Integer.parseInt(label.getText());
+        noteHandler = new NoteHandler(model);
         setUpWriteBox();
         setUpDisplayBox();
-        updateNoteList();
-
+        setUpRoot();
     }
     /**
      * Sets up the left VBox, text area, buttons and button HBox
@@ -97,7 +95,7 @@ public class NoteScene implements ReturnContent {
 
     /**
      * This method basically does the same thing as ListView's refresh,
-     * but doesn't duplicate the notes on the list view. 
+     * but doesn't duplicate the notes on the list view.
      */
     public void updateNoteList() {
         ArrayList<String> notes = noteHandler.readNotes();
@@ -119,47 +117,21 @@ public class NoteScene implements ReturnContent {
         }
     }
 
-    /**
-     * Does a bunch of stuff, including setting up the noteHandler
-     * class, setting up the Split Pane,applying some style classes,
-     * and of course returning the scene.
-     *
-     * @param mainStage     A reference to the main stage.
-     * @param calendarScene A reference to the calendar scene to go
-     *                      back to
-     * @param model         A reference to the calendar model, needed for the
-     *                      note handler class
-     * @return A Scene with a split Pane, for writing and reading notes
-     */
-    /*Public Scene getScene(Stage mainStage, Scene calendarScene,
-                          CalendarModel model) {
-        // Get ref to main stage, store it.
-        this.mainStage = mainStage;
-        this.calendarScene = calendarScene;
-        this.model = model;
 
-        // Setup a new noteHandler object
-        noteHandler = new NoteHandler(model);
+    public void setUpRoot() {
 
-        // Set up VBoxes
-        setUpDisplayBox();
-        setUpWriteBox();
+        // Set up split pane
+        root.getItems().addAll(writeBox, noteList);
+        root.setOrientation(Orientation.HORIZONTAL);
 
-        // Set up split pane.
-        //private VBox displayBox = new VBox();
-        SplitPane splitPane = new SplitPane();
-        splitPane.getItems().addAll(writeBox, noteList);
-        splitPane.setOrientation(Orientation.HORIZONTAL);
+         root.setMinSize(1000, 900);
 
-        Scene noteScene = new Scene(splitPane, 1000, 900);
-
-        // Apply style rules to this scene
-        noteScene.getStylesheets().add(this.getClass().getResource(
+        // Apply style rules to the root
+        root.getStylesheets().add(this.getClass().getResource(
                 "./styleRules.css").toExternalForm());
 
-        return noteScene;
     }
-*/
+    
     @Override
     public Parent getContent() {
         return root;
