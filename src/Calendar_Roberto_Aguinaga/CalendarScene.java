@@ -4,15 +4,23 @@
  */
 package Calendar_Roberto_Aguinaga;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.Priority;
 
 
 public class CalendarScene implements ReturnContent {
