@@ -9,34 +9,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NoteHandler {
-    private final String DATESTRING;
-    // A calendar model
-    private final CalendarModel MODEL;
-    // File
-    private File file;
+    // Only one file variable to access throughout class.
+    private final File FILE;
 
     /**
-     * Constructor takes model and stores the reference.
+     * Constructor takes model and creates a file name out of the date.
      * @param model A CalendarModel
+     * @param day An int representing the date we are storing notes for
      */
     public NoteHandler(CalendarModel model, int day) {
-        this.MODEL = model;
-        DATESTRING = model.getDateString(day);
-        file = new File(DATESTRING + ".txt");
-    }
-
-    /**
-     * This is kind of a pointless method. But I kept it around
-     * because I had already typed it out. It basically does the same
-     * thing as File's file.exists()
-     * @return A boolean, true if the file exists, false if it does not.
-     */
-    public boolean checkIfNoteExists() {
-        if (file.exists()) {
-            return true;
-        } else {
-            return false;
-        }
+        // A calendar model
+        String dateString = model.getDateString(day);
+        FILE = new File(dateString + ".txt");
     }
 
     /**
@@ -51,8 +35,8 @@ public class NoteHandler {
         // Check if the file exists, if it does not, create a new
         // file. If the file does exist, open it in append mode. Used
         // try-with-resources blocks for auto resource management.
-        if (!checkIfNoteExists()) {
-            try (FileWriter fileWriter = new FileWriter(file, false);
+        if (!FILE.exists()) {
+            try (FileWriter fileWriter = new FileWriter(FILE, false);
                  PrintWriter printWriter = new PrintWriter(fileWriter)) {
                 printWriter.println(notes);
             } catch (IOException ioException) {
@@ -60,7 +44,7 @@ public class NoteHandler {
             } // End of try-catch clause
         } else {
             // Open file in append mode
-            try (FileWriter fWriter = new FileWriter(file, true);
+            try (FileWriter fWriter = new FileWriter(FILE, true);
                  PrintWriter pWriter = new PrintWriter(fWriter)) {
                 pWriter.println(notes);
             } catch (IOException e) {
@@ -84,8 +68,8 @@ public class NoteHandler {
             // Make file object, check if it exist, if it does, start
             // scanning through it with a while loop + Scanner,
             // adding lines to the ArrayList
-            if (file.exists()) {
-                Scanner noteScanner = new Scanner(file);
+            if (FILE.exists()) {
+                Scanner noteScanner = new Scanner(FILE);
                 while (noteScanner.hasNextLine()) {
                     notes.add(noteScanner.nextLine());
                 }
