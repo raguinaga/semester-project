@@ -16,17 +16,17 @@ import javafx.scene.layout.*;
 
 
 public class CalendarScene implements ReturnContent {
-    // root container plus a date picker for moving to other dates
+    // root container plus the calendar model to use
     private final VBox ROOT = new VBox();
-    private final CalendarModel MODEL; // Calendar model
+    private CalendarModel calendarModel; // Calendar model
 
     // HBox for the date picker, GridPane for Calendar Body
-    private final HBox pickerBox = new HBox();
-    private final GridPane calendarGrid = new GridPane();
+    private HBox dateNavBox = new HBox();
+    private GridPane calendarGrid = new GridPane();
 
     // Date picker for moving to other, plus button to actually go
-    private final DatePicker datePicker = new DatePicker();
-    private final Button GOTODATE = new Button("Go to date");
+    private DatePicker datePicker = new DatePicker();
+    private Button goToDate = new Button("Go to date");
 
     // HBoxes for the calendar controls.
     private HBox gridBox; // for the calendar grid
@@ -38,7 +38,7 @@ public class CalendarScene implements ReturnContent {
      * the class to set up the Calander controls
      */
     public CalendarScene() {
-        MODEL = new CalendarModel();
+        calendarModel = new CalendarModel();
         setUpDatePicker();
         createWeekHeader();
         createCalendar();
@@ -48,12 +48,15 @@ public class CalendarScene implements ReturnContent {
 
     /**
      * Second Constructor sets up a CalendarModel copied from a
-     * supplied parameter.
+     * supplied parameter. It then calls all the rest of the set up
+     * methods to create a new root pane.
      *
      * @param cm
      */
     public CalendarScene(CalendarModel cm) {
-        MODEL = new CalendarModel(cm);
+        calendarModel = new CalendarModel(cm); // copy constructor call
+
+        // Call to the rest of the methods.
         setUpDatePicker();
         createWeekHeader();
         createCalendar();
@@ -140,7 +143,7 @@ public class CalendarScene implements ReturnContent {
         // numbers for the days
         int gridCount = 1;
         int lblCount = 1;
-        int offset = MODEL.getFirstDay();
+        int offset = calendarModel.getFirstDay();
 
         for (Node node : calendarGrid.getChildren()) {
             VBox dayCell = (VBox) node; // have to cast nodes
@@ -153,7 +156,7 @@ public class CalendarScene implements ReturnContent {
             } else {
                 // if the number of nodes exceeds the days in the
                 // month, darken the days, do not add labels
-                if (lblCount > MODEL.getDaysInMonth()) {
+                if (lblCount > calendarModel.getDaysInMonth()) {
                     node.setStyle("-fx-background-color: #737373");
                 } else {
                     Label numberLbl = new Label(Integer.toString(lblCount));
@@ -164,7 +167,7 @@ public class CalendarScene implements ReturnContent {
                     dayCell.addEventHandler(MouseEvent.MOUSE_CLICKED,
                             event -> {
                                 NoteScene noteScene =
-                                        new NoteScene(numberLbl, MODEL);
+                                        new NoteScene(numberLbl, calendarModel);
                                 dayCell.getScene()
                                         .setRoot(noteScene.getContent());
                             });
@@ -175,17 +178,17 @@ public class CalendarScene implements ReturnContent {
     }
 
     private void setUpDatePicker() {
-        GOTODATE = new Button("Go to date");
-        GOTODATE.setOnMouseClicked(event -> {
-            MODEL = new CalendarModel(datePicker.getValue());
-            CalendarScene calScene = new CalendarScene(MODEL);
-            GOTODATE.getScene().setRoot(calScene.getContent());
+        goToDate = new Button("Go to date");
+        goToDate.setOnMouseClicked(event -> {
+            calendarModel = new CalendarModel(datePicker.getValue());
+            CalendarScene calScene = new CalendarScene(calendarModel);
+            goToDate.getScene().setRoot(calScene.getContent());
         });
 
         // Sets up the HBox container for the controls
-        pickerBox.getChildren().addAll(datePicker, GOTODATE);
-        pickerBox.setSpacing(10);
-        pickerBox.setAlignment(Pos.TOP_CENTER);
+        dateNavBox.getChildren().addAll(datePicker, goToDate);
+        dateNavBox.setSpacing(10);
+        dateNavBox.setAlignment(Pos.TOP_CENTER);
     }
 
 
@@ -198,7 +201,7 @@ public class CalendarScene implements ReturnContent {
         // Set up a label and HBox for displaying the Date above
         // the calendar
         // Label telling user what month / year they are in.
-        Label nameLbl = new Label(MODEL.getMonthName());
+        Label nameLbl = new Label(calendarModel.getMonthName());
         HBox nameBox = new HBox(nameLbl);
         nameBox.setAlignment(Pos.CENTER);
         nameBox.setMaxWidth(600);
@@ -207,7 +210,7 @@ public class CalendarScene implements ReturnContent {
 
         // Final root VBox setup
         ROOT.setAlignment(Pos.CENTER);
-        ROOT.getChildren().addAll(pickerBox, nameBox, headerBox,
+        ROOT.getChildren().addAll(dateNavBox, nameBox, headerBox,
                 gridBox);
         ROOT.setSpacing(5);
         ROOT.setPadding(new Insets(15));
