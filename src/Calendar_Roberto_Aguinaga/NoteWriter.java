@@ -19,7 +19,7 @@ public class NoteWriter {
      * @param date
      */
     public NoteWriter(String date) {
-        // Create a file object but does not try top open it
+        // Creates a file object but does not try to open it
         FILE = new File(date + ".txt");
     }
 
@@ -31,8 +31,7 @@ public class NoteWriter {
      *              honestly should've named this "tasks"
      */
     public void writeNote(String notes) {
-        // Make the file name based on the
-        // Check if the file exists, if it does not, create a new
+        // Check if the file exists. If it does not, create a new
         // file. If the file does exist, open it in append mode. Used
         // try-with-resources blocks for auto resource management.
         if (!FILE.exists()) {
@@ -41,7 +40,7 @@ public class NoteWriter {
                 printWriter.println(notes);
             } catch (IOException ioException) {
                 System.err.println(ioException.getCause());
-            } // End of try-catch clause
+            } // End of first try-catch clause
         } else {
             // Open file in append mode
             try (FileWriter fWriter = new FileWriter(FILE, true);
@@ -55,30 +54,27 @@ public class NoteWriter {
 
     /**
      * Reads notes from a file named after the current calendar
-     * model's date. This turned out to be a mistake as it will
-     * always display the model's date's notes, instead of the VBox
-     * dayCell the user specified... Not sure of how to get the
-     * specific date even now...
+     * model's date.
      *
      * @return An ArrayList of Strings containing notes / tasks /
-     * whatever is in the file
+     *         whatever is in the file
      */
     public ArrayList<String> readNotes() {
-        ArrayList<String> notes = new ArrayList<>();
+        ArrayList<String> noteList = new ArrayList<>();
         try {
-            // Make file object, check if it exist, if it does, start
+            // Check if file exists, if it does, start
             // scanning through it with a while loop + Scanner,
             // adding lines to the ArrayList
             if (FILE.exists()) {
                 Scanner noteScanner = new Scanner(FILE);
                 while (noteScanner.hasNextLine()) {
-                    notes.add(noteScanner.nextLine());
+                    noteList.add(noteScanner.nextLine());
                 }
                 noteScanner.close();
-            }
+            } // If the file does not exist, do nothing.
         } catch (NullPointerException | FileNotFoundException e) {
             System.err.println(e.getCause());
         }
-        return notes;
+        return noteList;
     }
 }
