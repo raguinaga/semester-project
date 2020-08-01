@@ -174,6 +174,19 @@ public class CalendarModel {
         this.month = month;
         // Make a nice string representation of the calendar date.
     }
+
+    /**
+     * Copy constructor.
+     * @param model
+     */
+    public CalendarModel(CalendarModel model) {
+        this.monthName = model.getMonthName();
+        this.year = model.getYear();
+        this.month = model.getMonth();
+        this.firstDay = model.getFirstDay();
+        this.daysInMonth = model.getDaysInMonth();
+        this.calendar = model.getCalendar();
+    }
     // Getters
 
     /**
