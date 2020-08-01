@@ -12,20 +12,25 @@ public class NoteWriter {
     // Only one file variable to access throughout class.
     private final File FILE;
 
-
+    /**
+     * Sets up the File object to be manipulated by the NoteScene
+     * controls.
+     *
+     * @param date
+     */
     public NoteWriter(String date) {
-        // Use the calendar Model to create the string
+        // Create a file object but does not try top open it
         FILE = new File(date + ".txt");
     }
 
     /**
      * Writes notes to a file named after the ISO date of the current
-     * day, or ideally whatever the current calendar model's date is
-     * (though I never got that to work quite right).
+     * day.
+     *
      * @param notes A string, for things that need to be done. I
      *              honestly should've named this "tasks"
      */
-    public void writeNote( String notes) {
+    public void writeNote(String notes) {
         // Make the file name based on the
         // Check if the file exists, if it does not, create a new
         // file. If the file does exist, open it in append mode. Used
@@ -54,6 +59,7 @@ public class NoteWriter {
      * always display the model's date's notes, instead of the VBox
      * dayCell the user specified... Not sure of how to get the
      * specific date even now...
+     *
      * @return An ArrayList of Strings containing notes / tasks /
      * whatever is in the file
      */
