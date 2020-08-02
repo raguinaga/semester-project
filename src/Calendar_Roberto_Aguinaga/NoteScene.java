@@ -4,6 +4,7 @@
 
 package Calendar_Roberto_Aguinaga;
 
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 
 import javafx.scene.control.SplitPane;
@@ -172,8 +173,9 @@ public class NoteScene implements ReturnContent {
         // Set up split pane
         ROOT.getItems().addAll(writeBox, noteList);
         ROOT.setOrientation(Orientation.HORIZONTAL);
+        ROOT.setPadding(new Insets(15));
 
-         ROOT.setMinSize(1000, 900);
+        ROOT.setMaxSize(1000, 900);
 
         // Apply style rules to the root
         ROOT.getStylesheets().add(this.getClass().getResource(
